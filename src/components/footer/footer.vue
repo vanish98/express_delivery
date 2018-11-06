@@ -76,7 +76,6 @@ a::selection{
     padding-top: 2rem;
     padding-bottom: 5rem;
     cursor: pointer;
-    background-color:darken(#fff,3%);
 }
 .foot-link{
     position: relative;
@@ -96,7 +95,8 @@ a::selection{
             line-height: 1.2rem;            
         }
         a{
-            color: #999;
+            color: #666;
+            letter-spacing: 1px;
             &:hover{
                 color: #333;
             }

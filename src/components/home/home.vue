@@ -6,8 +6,7 @@
     <weCanDo></weCanDo>
     <homeNews :newsSoure='newsSoure'
     :newsBannerImg='newsBannerImg'></homeNews>
-    <homefooter></homefooter>
-    <copyRight></copyRight>
+    <appFooter></appFooter>
 </div>
 </template>
 
@@ -15,8 +14,7 @@
 import homeBanner from './banner'
 import weCanDo from './weCanDo'
 import homeNews from './news'
-import homefooter from '../footer/footer'
-import copyRight from '../footer/copyRight'
+import appFooter from '../appFooter'
 export default {
     data(){
         return{
@@ -58,8 +56,7 @@ export default {
         homeBanner,
         weCanDo,
         homeNews,
-        homefooter,
-        copyRight
+        appFooter
     }
 }
 </script>

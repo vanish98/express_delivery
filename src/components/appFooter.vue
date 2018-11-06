@@ -16,11 +16,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 .app-footer{
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0;
     left: 0;
+    background-color:darken(#f7f7f7,1%);
 }
 </style>

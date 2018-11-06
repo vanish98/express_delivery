@@ -25,6 +25,7 @@ html{
 body{
   font-size: 14px;
   overflow-x: hidden;
+  //background-color: #f7f7f7;
 }
 a{
   text-decoration: none;

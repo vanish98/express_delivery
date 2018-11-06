@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="server-header">
             <div class="left-part">
                 <i></i>
                 <span>公告</span>
@@ -37,9 +37,9 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style scoped lang='scss'>
 @import '../../style/mixin';
-.header{
+.server-header{
     position: relative;
     display: flex;
     align-items: center;
