@@ -20,7 +20,7 @@ export default {
 $text-color:#999;
 .topArticle{
     position: relative;
-    margin:5rem 0;
+    margin:7rem 0 12rem;
     h2{
         font-size: 1.4rem;
         color: rgba(6,7,15,1);

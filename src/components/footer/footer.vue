@@ -71,6 +71,7 @@ a::selection{
     position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
     border-top: 1px solid #ccc;
     padding-top: 2rem;

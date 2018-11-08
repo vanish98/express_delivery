@@ -53,13 +53,14 @@ export default {
 <style scoped lang='scss'>
 @import '../../style/mixin';
 .we-can-do{
+    overflow: hidden;
     position: relative;
     width: 100%;
-    margin-top: 3rem;
+    padding-top: 3rem;
     margin-bottom: 7rem;
     cursor: pointer;
 }
-.title{
+.title{   
     position: relative;
     width: 100%;
     height: 2rem;

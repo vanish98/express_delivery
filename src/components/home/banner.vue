@@ -20,6 +20,7 @@ export default {
 <style  lang='scss'>
 @import '../../../node_modules/compass-mixins/lib/compass/functions';
 .el-carousel{
+    overflow: hidden;
     background-color: #cff;
     img{
         position: absolute;

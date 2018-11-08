@@ -48,6 +48,7 @@ export default {
     position: relative;    
     h3{
         $lateValue:-3rem;
+        overflow: hidden;
         position: relative;
         display: block;
         font-size: 1rem;
