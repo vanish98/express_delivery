@@ -69,7 +69,7 @@ export default {
       // feat: #11
       scrollingX: true,
       scrollingY: true,
-      speed: 300,
+      speed: 400,
       easing: undefined,
       // 是否有一个padding样式，样式的大小应该和rail/bar的大小是一样。
       padding: false,
@@ -100,7 +100,7 @@ export default {
       /** Whether to keep show or not, default -> false */
       keepShow: false,
       /** Bar's background , default -> #00a650 */
-      background: '#c1c1c1',
+      background: 'rgb(24, 144, 255)',
       /** Bar's opacity, default -> 1  */
       opacity: 1,
       /** Styles when you hover scrollbar, it will merge into the current style */

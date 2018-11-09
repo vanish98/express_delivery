@@ -108,6 +108,9 @@ export default {
     },
     mounted() {
         this.show=true;
+    },
+    destroyed(){
+        this.$emit('pageDestroyed');
     }
 }
 </script>

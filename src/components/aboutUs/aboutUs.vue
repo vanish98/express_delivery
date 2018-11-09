@@ -67,6 +67,9 @@ export default {
         appFooter,
         topArticle,
         myStory
+    },
+    destroyed(){
+        this.$emit('pageDestroyed');
     }
 }
 </script>

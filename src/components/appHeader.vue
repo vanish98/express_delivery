@@ -58,6 +58,8 @@ $header-height:3rem;
     width: 100%;
     background-color: #409EFF;
     color: #fff;
+    @include transition(.4s);
+    z-index: 9999;
 }
 .logo{
     flex-grow: 2;

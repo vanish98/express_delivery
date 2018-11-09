@@ -20,7 +20,8 @@ export default {
     },
     data(){
         return{
-            index:0
+            index:0,
+            timer:null
         }
     },
     computed:{
@@ -29,11 +30,14 @@ export default {
         }
     },
     created() {
-        setInterval(()=>{  
+        this.timer = setInterval(()=>{  
                 this.index++;
                 this.index %=this.headerNote.length;
         },5000); 
     },
+    destroyed(){  
+        clearInterval(this.timer);    
+    }
 }
 </script>
 

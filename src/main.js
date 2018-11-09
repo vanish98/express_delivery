@@ -8,9 +8,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI);
 
-import vuescroll from 'vuescroll';
-import 'vuescroll/dist/vuescroll.css';
-Vue.use(vuescroll);
+import vuescroll from 'vuescroll/dist/vuescroll-native';
+import 'vuescroll/dist/vuescroll.css'
+import scrollConfig from '../config/vuescroll'
+Vue.use(vuescroll,{
+  ops:scrollConfig
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

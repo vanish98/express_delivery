@@ -4,8 +4,7 @@
     :bannerImg='bannerImg'
     :height='600'></homeBanner>
     <weCanDo></weCanDo>
-    <homeNews :newsSoure='newsSoure'
-    :newsBannerImg='newsBannerImg'></homeNews>
+    <homeNews :newsSoure='newsSoure'></homeNews>
     <appFooter></appFooter>
 </div>
 </template>
@@ -42,13 +41,11 @@ export default {
                 封面封底夹着我所有的白昼与黑夜的时候，阿谷，这个如山间清风，
                 拂面朗月的彝族姑娘已经给我发了好多信息。或许，伤悲的基调定性。`
                 },
-            ],
-            newsBannerImg:[ 
-                {id:1,imgSrc:'./static/img/banner1.jpg'},
-                {id:2,imgSrc:'./static/img/banner2.jpg'},
-                {id:3,imgSrc:'./static/img/banner3.jpg'},
-                {id:4,imgSrc:'./static/img/banner4.jpg'},
-                {id:5,imgSrc:'./static/img/banner5.jpg'}
+                {id:4,title:'娱乐八卦',imgSrc:'./static/img/home-news-pic2.jpg',
+                article:`当我还住在她丢掉的那首歌里，怀抱所有音符；当我仍在她丢掉的那本书里面，
+                封面封底夹着我所有的白昼与黑夜的时候，阿谷，这个如山间清风，
+                拂面朗月的彝族姑娘已经给我发了好多信息。或许，伤悲的基调定性。`
+                }
             ]
         }
     },
@@ -57,6 +54,9 @@ export default {
         weCanDo,
         homeNews,
         appFooter
+    },
+    destroyed(){
+        this.$emit('pageDestroyed');
     }
 }
 </script>
