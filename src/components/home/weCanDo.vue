@@ -1,8 +1,9 @@
 <template>
     <div class="we-can-do">
-        <div class="title">
+        <div class="w-title">
             <h2>功能及特色</h2>
             <span>我们在努力，坚持竭尽全力为客户提供优质服务</span>
+            <i class="w-c-d-line"></i>
         </div>
         <div class="w-cont">
             <div class="item"
@@ -54,18 +55,17 @@ export default {
 <style scoped lang='scss'>
 @import '../../style/mixin';
 .we-can-do{
-    overflow: hidden;
     position: relative;
     width: 100%;
-    padding-top: 6rem;
+    padding-top: 10rem;
     margin-bottom: 10rem;
     cursor: pointer;
 }
-.title{   
+.w-title{   
     position: relative;
     width: 100%;
-    height: 2rem;
-    margin-bottom: 1rem;
+    z-index: 99;
+    //margin-bottom: 1rem;
     h2{        
         display: block;
         //line-height: 2rem;
@@ -75,7 +75,7 @@ export default {
         font-size: 1.5rem; 
         color: rgb(99, 180, 210);
         &::after{
-            content:'/adv';
+            content:'/Merits';
             font-size: 0.9rem;
             font-family: '微软雅黑';
             color: #666;
@@ -84,6 +84,15 @@ export default {
     span{
         letter-spacing: 0.1rem;
         color: #999;
+        font-size: 0.7rem;
+    }
+    .w-c-d-line{
+        display: block;
+        width: 95%;
+        height: 0.2rem;
+        margin: 1rem auto 0;
+        background-color: #57c6e1;
+        background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
     }
 }
 .w-cont{
@@ -91,7 +100,11 @@ export default {
     display: flex;
     justify-content:space-around;
     flex-wrap: wrap;
-    width: 100%;   
+    width: 95%;   
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    @include box-shadow(0 0 0.3rem 0.3rem #ccc);
+
 }
 $item-w:14rem;
 $item-title-h:7rem;

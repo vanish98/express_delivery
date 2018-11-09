@@ -5,7 +5,7 @@
              <div class="circle"></div>
         </div>
         <div class="news-body">
-            <div class="item" 
+            <div class="ns-item" 
             v-for='obj in newsSoure' :key=obj.id>
                 <div class="out-border"></div>
                 <img :src="obj.imgSrc" alt="精彩瞬间">
@@ -36,11 +36,13 @@ export default {
 .home-news{
     position: relative;
     width: 100%;
-    margin-bottom: 10rem;
+    margin-bottom: 10rem;   
 }
 .news-title{
     position: relative;  
-    margin-bottom: 2rem;  
+    padding-bottom: 2rem;  
+    background-color: #fff;
+    z-index: 99;
     h3{
         $lateValue:-3rem;
         overflow: hidden;
@@ -93,6 +95,10 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 95%;
+    margin: 0.05rem auto 0; 
+    padding-bottom: 5rem;
+    @include box-shadow(0 0 0.3rem 0.3rem #ccc);
     cursor: pointer;
 }
 .out-border{
@@ -106,7 +112,7 @@ export default {
     @include box-shadow(0 0 3px 1px #4facfe);
     z-index: 99;
 }
-.item{
+.ns-item{
     position: relative;   
     display: flex;
     overflow: hidden; 
@@ -114,7 +120,9 @@ export default {
     @include box-shadow(0.5rem 0.5rem 3px  #666);
     img{
         display: block;
-         @include transition(.5s);
+        width: 15rem;
+        height: 20rem;
+        @include transition(.5s);
     }
     &:hover img{
         @include set-opacity(0.5);

@@ -22,7 +22,7 @@
                 </el-tooltip>   
             </div>
             <div class="wechat">
-                <span>关注我们 :</span>
+                <span>联系我们 :</span>
                 <el-popover
                     v-for='it in wechatAQQ'
                     :key='it.id'
