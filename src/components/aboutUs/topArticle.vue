@@ -3,7 +3,9 @@
         <h2>ABOUT US</h2>
         <span></span>
         <div class="art-body">
-            <p>{{topArticle}}</p>
+            <transition name="transX">
+                <p v-if='isCmptShow'>{{topArticle}}</p>
+            </transition>
         </div>
     </div>
 </template>
@@ -12,7 +14,15 @@
 export default {
     props:{
         topArticle:String
-    }
+    },
+    data(){
+        return{
+            isCmptShow:false
+        }
+    },
+    mounted() {
+        this.isCmptShow=true;
+    },
 }
 </script>
 

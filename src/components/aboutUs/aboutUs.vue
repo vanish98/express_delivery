@@ -5,9 +5,11 @@
         </div>
         <topArticle :topArticle='topArticle'></topArticle>
         <myStory 
-        :myStoryBody='myStoryBody'
+        :myStoryBody='myStoryBody'>
+        </myStory>
+        <advantage
         :advantage='advantage'
-        :achievementData='achievementData'></myStory>
+        :achievementData='achievementData'></advantage>
         <appFooter></appFooter>        
     </div>
 </template>
@@ -15,6 +17,7 @@
 <script>
 import topArticle from './topArticle'
 import myStory from './myStory'
+import advantage from './advantage'
 import appFooter from '../appFooter'
 export default {
     data(){
@@ -66,7 +69,11 @@ export default {
     components:{
         appFooter,
         topArticle,
-        myStory
+        myStory,
+        advantage
+    },
+    mounted() {      
+        this.$emit('scrollShowComponent',this.$children);
     },
     destroyed(){
         this.$emit('pageDestroyed');

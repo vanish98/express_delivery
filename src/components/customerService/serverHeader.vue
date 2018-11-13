@@ -64,7 +64,7 @@ export default {
         width: 1.2rem;
         height: 1.2rem;
         margin: 0 0.5rem;
-        background-image: url('../../assets/customer-service-header-left.png');
+        background-image: url('../../assets/img/customer-service-header-left.png');
         background-size: contain;
     }
     span{

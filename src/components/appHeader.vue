@@ -2,7 +2,7 @@
     <div class="header">
         <div class="logo">
             <a href="http://www.ele.me">
-                <img src="../assets/logo.png" alt="logo图标">
+                <img src="../assets/img/logo.png" alt="logo图标">
                 <h1>校园闪电侠</h1>
             </a>
         </div>
@@ -15,7 +15,7 @@
             <router-link to="suggest">投诉建议</router-link>
         </div>
         <div class="usercont">
-            <img src="../assets/logo.png" alt="用户头像">
+            <img src="../assets/img/logo.png" alt="用户头像">
             <span>用户名: <em>{{user}}</em></span>
         </div>
         <div class="message">

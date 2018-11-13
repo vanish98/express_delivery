@@ -42,6 +42,8 @@ export default {
     position: relative;  
     padding-bottom: 2rem;  
     background-color: #fff;
+    width: 97%;
+    margin: 0 auto;
     z-index: 99;
     h3{
         $lateValue:-3rem;
@@ -162,7 +164,7 @@ export default {
         } 
     }
 }
-.item:hover  .item-body{
+.ns-item:hover  .item-body{
     height:70%;
 }
 </style>

@@ -67,7 +67,7 @@ export default {
       initialScrollY: false,
       initialScrollX: false,
       // feat: #11
-      scrollingX: true,
+      scrollingX: false,
       scrollingY: true,
       speed: 400,
       easing: undefined,
@@ -94,7 +94,7 @@ export default {
     },
     bar: {
       /** How long to hide bar after mouseleave, default -> 500 */
-      showDelay: 500,
+      showDelay: 3000,
       /** Whether to show bar on scrolling, default -> true */
       onlyShowBarOnScroll: true,
       /** Whether to keep show or not, default -> false */

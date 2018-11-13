@@ -1,5 +1,5 @@
 <template>
-<transition name='demo'>
+<transition name='transX'>
     <div class="question" v-if='show'>
         <h4>常见问题</h4>
         <div class="question-body">
@@ -99,14 +99,5 @@ export default {
             }
         }
     }
-}
-.demo-leave-to,
-.demo-enter{
-    @include translateY(100px);
-    opacity: 0;
-}
-.demo-enter-active,
-.demo-leave-active{
-    transition: 1s;
 }
 </style>

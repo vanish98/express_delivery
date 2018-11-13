@@ -4,7 +4,9 @@
         <question 
         :questionData='questionData'
         :show='show'></question>
-        <serverCall @openMsg='openMsg'></serverCall>
+        <serverCall
+        :show='show'
+        @openMsg='openMsg'></serverCall>
     </div>
 </template>
 
