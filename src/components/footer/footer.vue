@@ -22,7 +22,7 @@
                 </el-tooltip>   
             </div>
             <div class="wechat">
-                <span>关注我们 :</span>
+                <span>联系我们 :</span>
                 <el-popover
                     v-for='it in wechatAQQ'
                     :key='it.id'
@@ -71,12 +71,12 @@ a::selection{
     position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
     border-top: 1px solid #ccc;
     padding-top: 2rem;
     padding-bottom: 5rem;
     cursor: pointer;
-    background-color:darken(#fff,3%);
 }
 .foot-link{
     position: relative;
@@ -96,7 +96,8 @@ a::selection{
             line-height: 1.2rem;            
         }
         a{
-            color: #999;
+            color: #666;
+            letter-spacing: 1px;
             &:hover{
                 color: #333;
             }

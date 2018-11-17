@@ -1,7 +1,9 @@
 <template>
     <div class="we-can-do">
-        <div class="title">
-            <h2>平台主要功能及特色</h2>
+        <div class="w-title">
+            <h2>功能及特色</h2>
+            <span>我们在努力，坚持竭尽全力为客户提供优质服务</span>
+            <i class="w-c-d-line"></i>
         </div>
         <div class="w-cont">
             <div class="item"
@@ -55,60 +57,56 @@ export default {
 .we-can-do{
     position: relative;
     width: 100%;
-    margin-top: 3rem;
-    margin-bottom: 7rem;
+    padding-top: 10rem;
+    margin-bottom: 10rem;
     cursor: pointer;
 }
-.title{
+.w-title{   
     position: relative;
     width: 100%;
-    height: 2rem;
+    z-index: 99;
+    //margin-bottom: 1rem;
     h2{        
         display: block;
-        width: 14rem;
-        height: 2rem;
-        margin: 0 auto;
+        //line-height: 2rem;
+        margin: 0 auto 0.6rem;
         font-size: 1.1rem;
-        letter-spacing: 4px;    
-        color: #FFF;
-        &:after,
-        &:before{
-            content: '';
-            display: block;
-            position: absolute;
-            right: -7rem;
-            top: 25%;            
-            width: 50%;
-            height: 3px;
-            background-color: #FFCCCC;
-            background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-        }  
-        &:before{
-            left: -7rem;
-            background-image: linear-gradient(20deg, #b721ff 0%, #21d4fd 100%);
+        letter-spacing: 4px;   
+        font-size: 1.5rem; 
+        color: rgb(99, 180, 210);
+        &::after{
+            content:'/Merits';
+            font-size: 0.9rem;
+            font-family: '微软雅黑';
+            color: #666;
         }
     }
-    &:before{
-        content:'';
-        position: absolute;
-        left: 0;
-        top: -3rem;
-        display: block;         
-        width: 100%;
-        height: 6rem;
-        background-image: url('../../../static/img/home-weCanDo-title-bg.jpg');
-        z-index: -1;
+    span{
+        letter-spacing: 0.1rem;
+        color: #999;
+        font-size: 0.7rem;
     }
-    
+    .w-c-d-line{
+        display: block;
+        width: 95%;
+        height: 0.2rem;
+        margin: 1rem auto 0;
+        background-color: #57c6e1;
+        background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+    }
 }
 .w-cont{
     position: relative;
     display: flex;
     justify-content:space-around;
     flex-wrap: wrap;
-    width: 100%;   
+    width: 95%;   
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    @include box-shadow(0 0 0.3rem 0.3rem #ccc);
+
 }
-$item-w:12rem;
+$item-w:14rem;
 $item-title-h:7rem;
 $item--title-w:7rem;
 $bd-radius:$item-title-h /2 *1.1;
@@ -150,7 +148,7 @@ $bd-radius:$item-title-h /2 *1.1;
         line-height: 1.2rem;
         letter-spacing: 3px;
         font-size: 0.8rem;
-        color: #000;
+        color: #666;
         text-indent: 2rem;        
         &::selection{
             background-color:#93C; 

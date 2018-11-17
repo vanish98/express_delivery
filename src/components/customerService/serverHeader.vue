@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="server-header">
             <div class="left-part">
                 <i></i>
                 <span>公告</span>
@@ -20,7 +20,8 @@ export default {
     },
     data(){
         return{
-            index:0
+            index:0,
+            timer:null
         }
     },
     computed:{
@@ -29,17 +30,20 @@ export default {
         }
     },
     created() {
-        setInterval(()=>{  
+        this.timer = setInterval(()=>{  
                 this.index++;
                 this.index %=this.headerNote.length;
         },5000); 
     },
+    destroyed(){  
+        clearInterval(this.timer);    
+    }
 }
 </script>
 
-<style lang='scss'>
+<style scoped lang='scss'>
 @import '../../style/mixin';
-.header{
+.server-header{
     position: relative;
     display: flex;
     align-items: center;
@@ -60,7 +64,7 @@ export default {
         width: 1.2rem;
         height: 1.2rem;
         margin: 0 0.5rem;
-        background-image: url('../../assets/customer-service-header-left.png');
+        background-image: url('../../assets/img/customer-service-header-left.png');
         background-size: contain;
     }
     span{

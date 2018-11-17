@@ -1,40 +1,43 @@
 <template>
-    <div class="question">
-            <h4>常见问题</h4>
-            <div class="question-body">
-                <dl v-for='item in questionData' :key='item.id'>
-                    <dt>
-                        <img :src="item.topImg" alt="常见问题图标">
-                        <h5>{{item.h5Title}}</h5>
-                    </dt>
-                    <dd>
-                        <ul>
-                            <li v-for="it in item.list" :key='it.quest'>
-                                <el-popover
-                                placement="left"
-                                :title="item.h5Title"
-                                width="200"
-                                trigger="hover"
-                                :content="it.result">
-                                <a href="javascript:void(0);" slot="reference">{{it.quest}}</a>
-                                </el-popover>
-                            </li>
-                        </ul>
-                    </dd>
-                </dl>
-            </div>
+<transition name='transX'>
+    <div class="question" v-if='show'>
+        <h4>常见问题</h4>
+        <div class="question-body">
+            <dl v-for='item in questionData' :key='item.id'>
+                <dt>
+                    <img :src="item.topImg" alt="常见问题图标">
+                    <h5>{{item.h5Title}}</h5>
+                </dt>
+                <dd>
+                    <ul>
+                        <li v-for="it in item.list" :key='it.quest'>
+                            <el-popover
+                            placement="left"
+                            :title="item.h5Title"
+                            width="200"
+                            trigger="hover"
+                            :content="it.result">
+                            <a href="javascript:void(0);" slot="reference">{{it.quest}}</a>
+                            </el-popover>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
         </div>
+    </div>
+</transition>
 </template>
 
 <script>
 export default {
     props:{
-        questionData:Array
+        questionData:Array,
+        show:Boolean
     }
 }
 </script>
 
-<style lang='scss'>
+<style scoped lang='scss'>
 @import '../../style/mixin';
 .question{
     position: relative;

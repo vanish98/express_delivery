@@ -1,0 +1,21 @@
+@import "_mixin.scss";
+
+.transX-leave-to,
+.transX-enter{
+    $tsX:100px;
+    @include translateX($tsX);
+    @include set-opacity(0);
+}
+.transX-enter-active,
+.transX-leave-active,
+.transX-re-enter-active,
+.transX-re-leave-active{
+    @include transition(1s);
+}
+
+.transX-re-leave-to,
+.transX-re-enter{
+    $tsX:-100px;
+    @include translateX($tsX);
+    @include set-opacity(0);
+}

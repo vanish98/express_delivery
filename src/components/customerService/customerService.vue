@@ -1,8 +1,12 @@
 <template>
     <div class="customer-service">
         <serverHeader :headerNote='headerNote'></serverHeader>
-        <question :questionData='questionData'></question>
-        <serverCall @openMsg='openMsg'></serverCall>
+        <question 
+        :questionData='questionData'
+        :show='show'></question>
+        <serverCall
+        :show='show'
+        @openMsg='openMsg'></serverCall>
     </div>
 </template>
 
@@ -84,8 +88,9 @@ export default {
             headerNote:[
                 '小手一抖 快递到手!',
                 '我听过最动听的话是: 您的快递到了 !',
-                '天冷了, 拿快递这种事就交给我们把 !'
-            ]
+                '天冷了, 拿快递这种事就交给我们吧 !'
+            ],
+            show:false
         }
     },
     components:{
@@ -102,6 +107,12 @@ export default {
             type: 'error'
         });
       }
+    },
+    mounted() {
+        this.show=true;
+    },
+    destroyed(){
+        this.$emit('pageDestroyed');
     }
 }
 </script>

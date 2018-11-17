@@ -1,22 +1,21 @@
 <template>
 <div class="appHome">
-    <homeBanner 
-    :bannerImg='bannerImg'
-    :height='600'></homeBanner>
+    <homeBanner
+    :bannerImg='bannerImg'></homeBanner>
+    <orderStep
+    :orderStepData='orderStepData'></orderStep>
     <weCanDo></weCanDo>
-    <homeNews :newsSoure='newsSoure'
-    :newsBannerImg='newsBannerImg'></homeNews>
-    <homefooter></homefooter>
-    <copyRight></copyRight>
+    <homeNews :newsSoure='newsSoure'></homeNews>
+    <appFooter></appFooter>
 </div>
 </template>
 
 <script>
 import homeBanner from './banner'
+import orderStep from './orderStepHelp'
 import weCanDo from './weCanDo'
 import homeNews from './news'
-import homefooter from '../footer/footer'
-import copyRight from '../footer/copyRight'
+import appFooter from '../appFooter'
 export default {
     data(){
         return{
@@ -26,6 +25,20 @@ export default {
                 {id:3,imgSrc:'./static/img/banner3.jpg'},
                 {id:4,imgSrc:'./static/img/banner4.jpg'},
                 {id:5,imgSrc:'./static/img/banner5.jpg'}
+            ],
+            orderStepData:[
+                {id:1,title:'1',
+                    tips:`注册成功后,登录状态`
+                },
+                {id:2,title:'2',
+                    tips:`点击个人中心,完善姓名、
+                    手机号等个人信息以便于工作人员联系您,
+                    然后就可以发布订单啦`
+                },
+                {id:3,title:'3',
+                    tips:`工作人员选择接单,
+                    送到您手上,由您签收,订单完成。`
+                }
             ],
             newsSoure:[
                 {id:1,title:'校园资讯',imgSrc:'./static/img/home-news-pic1.jpg',
@@ -44,22 +57,23 @@ export default {
                 封面封底夹着我所有的白昼与黑夜的时候，阿谷，这个如山间清风，
                 拂面朗月的彝族姑娘已经给我发了好多信息。或许，伤悲的基调定性。`
                 },
-            ],
-            newsBannerImg:[ 
-                {id:1,imgSrc:'./static/img/banner1.jpg'},
-                {id:2,imgSrc:'./static/img/banner2.jpg'},
-                {id:3,imgSrc:'./static/img/banner3.jpg'},
-                {id:4,imgSrc:'./static/img/banner4.jpg'},
-                {id:5,imgSrc:'./static/img/banner5.jpg'}
+                {id:4,title:'娱乐八卦',imgSrc:'./static/img/home-news-pic2.jpg',
+                article:`当我还住在她丢掉的那首歌里，怀抱所有音符；当我仍在她丢掉的那本书里面，
+                封面封底夹着我所有的白昼与黑夜的时候，阿谷，这个如山间清风，
+                拂面朗月的彝族姑娘已经给我发了好多信息。或许，伤悲的基调定性。`
+                }
             ]
         }
     },
     components:{
         homeBanner,
+        orderStep,
         weCanDo,
         homeNews,
-        homefooter,
-        copyRight
+        appFooter
+    },
+    destroyed(){
+        this.$emit('pageDestroyed');
     }
 }
 </script>
@@ -67,5 +81,7 @@ export default {
 <style>
 .appHome{
     position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 </style>

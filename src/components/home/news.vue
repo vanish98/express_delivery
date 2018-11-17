@@ -1,11 +1,11 @@
 <template>
     <div class="home-news">
         <div class="news-title">
-             <h3>那一瞬间</h3>
+             <h3>精彩瞬间</h3>
              <div class="circle"></div>
         </div>
         <div class="news-body">
-            <div class="item" 
+            <div class="ns-item" 
             v-for='obj in newsSoure' :key=obj.id>
                 <div class="out-border"></div>
                 <img :src="obj.imgSrc" alt="精彩瞬间">
@@ -13,12 +13,6 @@
                     <h4>{{obj.title}}</h4>
                     <p>{{obj.article}}</p>
                 </div>
-            </div>
-            <div class="banner-more">
-                <newsBanner
-                class="newsBanner"
-                :bannerImg='newsBannerImg'
-                :height='400'></newsBanner>
             </div>
         </div>
     </div>
@@ -42,17 +36,23 @@ export default {
 .home-news{
     position: relative;
     width: 100%;
-    margin-bottom: 10rem;
+    margin-bottom: 10rem;   
 }
 .news-title{
-    position: relative;    
+    position: relative;  
+    padding-bottom: 2rem;  
+    background-color: #fff;
+    width: 97%;
+    margin: 0 auto;
+    z-index: 99;
     h3{
         $lateValue:-3rem;
+        overflow: hidden;
         position: relative;
         display: block;
         font-size: 1rem;
-        letter-spacing: 2px;
-        color: #333;
+        letter-spacing: 0.1rem;
+        color: #666;
         z-index: 66;
         &:after,
         &:before{
@@ -62,13 +62,13 @@ export default {
             right: $lateValue;
             top: 50%;            
             width: 50%;
-            height: 0.5rem;
+            height: 0.2rem;
             background-color: #FFCCCC;
-            background-image: linear-gradient(to right, #d9afd9 0%, #97d9e1 100%);
+            background-image: linear-gradient(to right, #97d9e1 0%, #fff 50%);
         }  
         &:before{
             left: $lateValue;
-            background-image: linear-gradient(to left, #d9afd9 0%, #97d9e1 100%);
+            background-image: linear-gradient(to left, #97d9e1 0%, #fff 50%);
         }
     }
 }
@@ -78,15 +78,15 @@ export default {
     position: absolute;
     left: 50%;
     top: 0;
-    margin-top: -$circle-h +1rem;
+    margin-top: -$circle-h +0.7rem;
     margin-left: -$circle-h;
     @include circle($circle-w,#fff);
     &::after{
-        $moveValue:1rem;
+        $moveValue:0.5rem;
         content:'';
         display: block;
         position: absolute;
-        @include circle($circle-w +$moveValue,#d9afd9);
+        @include circle($circle-w +$moveValue,#97d9e1);
         margin-left: -$moveValue /2;
         margin-top: -$moveValue /2;
         z-index: -1;
@@ -97,6 +97,10 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 95%;
+    margin: 0.05rem auto 0; 
+    padding-bottom: 5rem;
+    @include box-shadow(0 0 0.3rem 0.3rem #ccc);
     cursor: pointer;
 }
 .out-border{
@@ -110,14 +114,17 @@ export default {
     @include box-shadow(0 0 3px 1px #4facfe);
     z-index: 99;
 }
-.item{
+.ns-item{
     position: relative;   
     display: flex;
     overflow: hidden; 
     margin-top: 4rem;
+    @include box-shadow(0.5rem 0.5rem 3px  #666);
     img{
         display: block;
-         @include transition(.5s);
+        width: 15rem;
+        height: 20rem;
+        @include transition(.5s);
     }
     &:hover img{
         @include set-opacity(0.5);
@@ -147,26 +154,18 @@ export default {
         line-height: 1.5rem;
         font-size: 0.7rem;
         text-indent: 1.4rem;
+        letter-spacing: 0.1rem;
         text-align:justify; 
         text-justify:inter-ideograph; 
+        color: #333;
         &::selection{
             background-color:#93C; 
             color:#FCF;
         } 
     }
 }
-.item:hover  .item-body{
+.ns-item:hover  .item-body{
     height:70%;
-}
-
-.banner-more{
-    position: relative;
-    width: 300px;
-    height: 400px;
-    margin-top: 4rem;
-}
-.newsBanner .el-carousel__container{
-    height: 600px;
 }
 </style>
 

@@ -1,5 +1,6 @@
 <template>
-    <div class="server-callUs">
+<transition name='transX-re'>
+    <div class="server-callUs" v-if="show">
             <h4>联系客服</h4>
             <div class="callUs-body">
                 <div class="chat">
@@ -34,15 +35,18 @@
                 </div>
             </div>
         </div>
+</transition>
 </template>
 
 <script>
 export default {
-
+    props:{
+        show:Boolean
+    }
 }
 </script>
 
-<style  lang='scss'>
+<style scoped lang='scss'>
 @import '../../style/mixin';
 .server-callUs{
     position: relative;   
@@ -80,7 +84,7 @@ export default {
         margin: 0 1rem 2rem 2rem;
         border-right: 1px solid #ccc;
         i{
-            background-image: url('../../assets/customer-service-footer-left.png');
+            background-image: url('../../assets/img/customer-service-footer-left.png');
         }
         
     }
@@ -125,7 +129,7 @@ export default {
         margin-bottom: 2rem;
         flex-grow: 1.3;
         i{
-            background-image: url('../../assets/customer-service-footer-right.png');
+            background-image: url('../../assets/img/customer-service-footer-right.png');
         }
     }
 }
