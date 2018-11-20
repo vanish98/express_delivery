@@ -8,7 +8,9 @@
             <div class="ns-item" 
             v-for='obj in newsSoure' :key=obj.id>
                 <div class="out-border"></div>
-                <img :src="obj.imgSrc" alt="精彩瞬间">
+                <transition name='opa'>
+                    <img :src="obj.imgSrc" v-if="isCmptShow" alt="精彩瞬间">
+                </transition>
                 <div class="item-body">
                     <h4>{{obj.title}}</h4>
                     <p>{{obj.article}}</p>
@@ -21,9 +23,13 @@
 <script>
 import newsBanner from './banner'
 export default {
+    data(){
+        return{
+            isCmptShow:false
+        }
+    },
     props:{
-        newsSoure:Array,
-        newsBannerImg:Array
+        newsSoure:Array
     },
     components:{
         newsBanner

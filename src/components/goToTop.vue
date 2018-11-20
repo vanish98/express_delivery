@@ -51,4 +51,14 @@ export default {
         color: #999;
     }
 }
+
+@media only screen and (max-width:640px){
+    .goto-top{
+        width: 3rem;
+    }
+    .show-top,
+    .goto-body{
+         height: 3rem;
+    }   
+}
 </style>

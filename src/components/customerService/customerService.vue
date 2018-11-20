@@ -117,11 +117,15 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
+<style lang='scss'>
 .customer-service{
     position: relative;
     padding: 2rem 0;
     background-color: rgb(247, 247, 247);
     color: #333;       
+}
+//立即咨询的提醒
+.el-message{
+    top:100px;
 }
 </style>

@@ -61,9 +61,11 @@ export default {
                this.showGoTop = false;
           }
           for(let i =0; i <this.shwoCompts.length ;i++){
-              if(getElementTop(this.shwoCompts[i].$el) < vertical.scrollTop + 500){
+              if(getElementTop(this.shwoCompts[i].$el) < vertical.scrollTop + 450){
+                  this.shwoCompts[i].$data.isCmptShow =true;    
+              }
+              if(vertical.process==1){
                   this.shwoCompts[i].$data.isCmptShow =true;
-                   
               }
           }
           
@@ -90,7 +92,7 @@ html{
   //以20为基准 
 }
 body{
-  font-size: 14px;
+  font-size: 0.7rem;
   overflow: hidden;
   //background-color: #f7f7f7;
 }
@@ -108,6 +110,10 @@ html,body,#app{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+//顶部个人中心消息红点
+.el-badge__content.is-fixed.is-dot{
+    right: 0;
+}
 .__vuescroll{
   @include transition(.6s);
 }
@@ -118,8 +124,13 @@ html,body,#app{
     @include transition(.8s); 
     @include translateY(-100%);
 }
+textarea::selection,
+input::selection,
+h1::selection,
 h2::selection,
 h3::selection,
+h4::selection,
+h5::selection,
 p::selection{
     background-color:#93C; 
     color:#FCF;
@@ -132,4 +143,39 @@ p::selection{
 .router-leave-active{
   @include transition(.3s); 
 }
+// @media only screen and (max-width:1750px){
+//     html{
+//       font-size: 114%;
+//     }
+// }
+// @media only screen and (max-width:1550px){
+//     html{
+//       font-size: 100.91%;
+//     }
+// }
+// @media only screen and (max-width:1400px){
+//     html{
+//       font-size: 91.14%;
+//     }
+// }
+// @media only screen and (max-width:1200px){
+//     html{
+//       font-size: 78.12%;
+//     }
+// }
+// @media only screen and (max-width:992px){
+//     html{
+//       font-size: 64.58%;
+//     }
+// }
+// @media only screen and (max-width:768px){
+//     html{
+//       font-size: 50%;
+//     }
+// }
+// @media only screen and (max-width:640px){
+//     html{
+//       font-size: 32.55%;
+//     }
+// }
 </style>

@@ -11,9 +11,10 @@
             <div class="rightData">
                 <div class="achievement"
                 v-for='it in achievementData'
-                :key='it.title'
-                v-if='isCmptShow'>
-                    <em>{{number(it.data)}}</em>
+                :key='it.title'>
+                    <transition name="moveX">
+                         <em v-if='isCmptShow'>{{it.data}}</em>   
+                    </transition>
                     <span>{{it.title}}</span>
                 </div>
             </div>
@@ -30,33 +31,6 @@ export default {
         return{
             isCmptShow:false
         }
-    },
-    computed:{
-        number(){
-            return data=>{    
-                window.requestAnimationFrame = window.requestAnimationFrame|| 
-                window.mozRequestAnimationFrame || 
-                window.webkitRequestAnimationFrame ||
-                window.msRequestAnimationFrame;
-                let stepdata = 0;
-                console.log(666);
-                function step(data) {
-                   // console.log(stepdata);
-                    
-                    stepdata += data/100;
-                    if (stepdata < data) {
-                        requestAnimationFrame(step);
-                        
-                    }
-                    
-                }
-                requestAnimationFrame(step); 
-                return stepdata;
-            }
-        }
-    },
-    watch:{
-        
     }
 }
 </script>
@@ -109,6 +83,13 @@ export default {
         text-align:justify;
         text-justify: inter-ideograph;
         color: #999;
+    }
+}
+
+@media only screen and (max-width:640px){
+    .article-body p{
+        line-height: 1.5rem;
+        width: 70%;
     }
 }
 </style>

@@ -1,0 +1,13 @@
+/* app-footer wechat */
+.el-popover{
+    width: 10rem;
+    min-width: 10rem;
+}
+.el-popover__title{
+    font-size: 0.8rem;
+}
+.wechat .el-button{
+    font-size: 0.7rem;
+    padding: 0.6rem 1rem;
+    margin-right: 0.5rem;
+}

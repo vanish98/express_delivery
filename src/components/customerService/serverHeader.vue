@@ -77,6 +77,7 @@ export default {
     span{
         display: block;   
         line-height: 1rem;
+        font-size: 0.7rem;
         width: 2.2rem;
         margin: 0 1rem;
         text-align: center;

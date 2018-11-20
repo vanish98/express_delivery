@@ -77,7 +77,7 @@ export default {
                 this.$refs.mySwiper.swiper.autoplay.start();
             } catch (error) { }
         }
-    },
+    }
 }
 </script>
 
@@ -97,6 +97,7 @@ export default {
 }
 .item-img{
     position: relative;
+    overflow: hidden;
     width: 100%;
     max-height: 30rem;
     img{
@@ -117,5 +118,12 @@ export default {
     opacity: 1;
     background: #007aff;
 }
-    
+
+.swiper-button-prev,
+.swiper-button-next{
+    width: 1.3rem;
+    height: 2.2rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 </style>

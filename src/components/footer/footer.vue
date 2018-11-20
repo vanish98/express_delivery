@@ -28,13 +28,13 @@
                     :key='it.id'
                     placement="top-end"
                     :title="it.title"
-                    width="200"
                     trigger="hover"
                     content="">
                     <el-button slot="reference">{{it.title}}</el-button>
                     <slot name="content">
-                        <img :src='it.img' 
-                        width="200" height='200' :alt='it.title'/>
+                        <img :src='it.img'
+                        class="wechat-qq-img"
+                        :alt='it.title'/>
                     </slot>
                 </el-popover>
             </div>
@@ -108,12 +108,36 @@ a::selection{
     position: relative;
     .wechat{
         text-align: left;
-    }
+    }   
+}
+.wechat-qq-img{
+    max-width: 10rem;
+    height: auto;
 }
 .serviceNumber{
     margin-bottom: 1rem;
     color: #333;
     text-align: left;
     letter-spacing: 1px;
+}
+
+@media only screen and (max-width:640px){
+    .footer{
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 3rem;
+    }
+    .callUs{
+        margin-top: 3rem;
+    }
+    .foot-link ul{
+        padding: 0 3.5rem;
+    }
+    .foot-link ul:last-child{
+        border-right: none;
+    }
+    .foot-link ul li{
+        line-height: 1.5rem;
+    }
 }
 </style>

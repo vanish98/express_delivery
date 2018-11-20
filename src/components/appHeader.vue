@@ -1,32 +1,37 @@
 <template>
     <div class="header">
-        <div class="logo">
-            <a href="http://www.ele.me">
+        <div class="logo hidden-sm-and-down">
+            <a href="javascript:void(0);">
                 <img src="../assets/img/logo.png" alt="logo图标">
                 <h1>校园闪电侠</h1>
             </a>
         </div>
         <div class="header-menu">
-            <router-link to="home">主页</router-link>
-            <router-link to="person">个人中心</router-link>
+            <router-link :class="{'link-active':currentPage=='home'}" 
+            to="/home">主页</router-link>
+            <router-link :class="{'link-active':currentPage==gotoPage}" 
+            :to="'/'+gotoPage">
+                <el-badge is-dot 
+                :hidden='!showMessage'
+                class="item">个人中心</el-badge>
+            </router-link>
             <!-- 加入我们写在关于我们中 -->
-            <router-link to="aboutUs">关于我们</router-link>
-            <router-link to="customerService">我的客服</router-link>
-            <router-link to="suggest">投诉建议</router-link>
+            <router-link :class="{'link-active':currentPage=='aboutUs'}"
+            to="/aboutUs">关于我们</router-link>
+            <router-link :class="{'link-active':currentPage=='customerService'}"
+            to="/customerService">我的客服</router-link>
+            <router-link :class="{'link-active':currentPage=='suggest'}" 
+            to="/suggest">投诉建议</router-link>
         </div>
         <div class="usercont">
-            <img src="../assets/img/logo.png" alt="用户头像">
-            <span>用户名: <em>{{user}}</em></span>
-        </div>
-        <div class="message">
-            <a href="javascript:void(0);">
-                <em>3</em>
-                <i class="el-icon-message"></i>
-            </a>
+            <img src="../assets/img/top-user.png" alt="用户头像">
+            <div class="username">
+                <em>{{user}}</em>
+            </div>
         </div>
         <div class="login-and-exit">
-            <a href="javascript:void(0);">登录</a>
-            <a href="javascript:void(0);">退出</a>
+            <a v-if="!login" href="javascript:void(0);">登录</a>
+            <a v-else href="javascript:void(0);">退出</a>
         </div>
     </div>
 </template>
@@ -35,9 +40,17 @@
 export default {
     data(){
         return{
-            user:'波哥'
+            user:'15279778477',
+            login:false,
+            showMessage:false,
+            gotoPage:'person'
         }
-    }
+    },
+    computed: {
+        currentPage(){         
+            return this.$route.path.split('/')[1];
+        }
+    },
 }
 </script>
 
@@ -46,7 +59,7 @@ export default {
 a{
     color: #fff;
 }
-.router-link-active{
+.link-active{
     background-color: #006bc7;
 }
 $header-height:3rem;
@@ -93,7 +106,7 @@ $header-height:3rem;
         justify-content: center;
         width: 5rem;
         height:$header-height;    
-        font-size: 16px; 
+        font-size: 0.8rem; 
         @include transition(.3s);   
         &:hover{
             background-color: #0c77d1;
@@ -127,20 +140,15 @@ $header-height:3rem;
     }
 }
 .login-and-exit{    
-    margin:0 2rem 0 .5rem;
+    margin:0 1rem 0 .5rem;
     a{
         @include set-inline-block;
         line-height: $header-height;
         margin: 0 .5rem;
-        font-size: 14px;
+        font-size: 0.7rem;
         &:hover{
             color: #F56C6C;
         }
-    }
-}
-@media only screen and (max-width:1100px) {
-    .logo{
-        display: none;
     }
 }
 </style>

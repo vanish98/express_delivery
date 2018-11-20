@@ -12,10 +12,73 @@
 .transX-re-leave-active{
     @include transition(1s);
 }
-
 .transX-re-leave-to,
 .transX-re-enter{
     $tsX:-100px;
     @include translateX($tsX);
     @include set-opacity(0);
+}
+
+.opa-enter-active,
+.opa-leave-active{
+    @include transition(3s);
+}
+.opa-leave-to,
+.opa-enter{
+    @include set-opacity(0);
+}
+
+
+.moveX-enter-active,
+.moveX-leave-active{
+    animation: contmoveX 1s;
+}
+.moveX-leave-to,
+.moveX-enter{
+    @include set-opacity(0);
+}
+
+@keyframes contmoveX{
+    0%{
+        @include translateX(200px);
+    }
+    50%{
+        @include translateX(-150px);
+    }
+    70%{
+        @include translateX(100px);
+    }
+    90%{
+        @include translateX(-30px);
+    }
+    100%{
+        @include translateX(0);
+    }
+}
+
+.moveY-enter-active,
+.moveY-leave-active{
+    animation: contmoveY 1s;
+}
+.moveY-leave-to,
+.moveY-enter{
+    @include set-opacity(0);
+}
+
+@keyframes contmoveY{
+    0%{
+        @include translateY(200px);
+    }
+    50%{
+        @include translateY(-150px);
+    }
+    70%{
+        @include translateY(100px);
+    }
+    90%{
+        @include translateY(-30px);
+    }
+    100%{
+        @include translateY(0);
+    }
 }

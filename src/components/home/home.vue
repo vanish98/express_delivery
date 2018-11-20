@@ -72,6 +72,9 @@ export default {
         homeNews,
         appFooter
     },
+    mounted() {      
+        this.$emit('scrollShowComponent',this.$children);
+    },
     destroyed(){
         this.$emit('pageDestroyed');
     }

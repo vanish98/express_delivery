@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
+<style  lang='scss'>
 .aboutUs{
     position: relative;
 }
@@ -94,5 +94,8 @@ export default {
         max-height: 100%;
     }
 
+}
+P{
+    text-indent: 2rem;
 }
 </style>
