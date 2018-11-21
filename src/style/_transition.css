@@ -180,6 +180,18 @@
   filter: alpha(opacity=0);
 }
 
+.opa-mini-enter {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.opa-mini-enter-active {
+  -moz-transition: 0.6s;
+  -o-transition: 0.6s;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+}
+
 .moveX-enter-active,
 .moveX-leave-active {
   animation: contmoveX 1s;

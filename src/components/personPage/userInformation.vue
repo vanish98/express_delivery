@@ -1,6 +1,6 @@
 <template>
     <div class="userInformation">
-        <person-title>个人中心 >> <em>个人信息</em></person-title>
+        <person-title>当前位置 :: 个人中心 >> <em>个人信息</em></person-title>
         <div class="information-cont">
             <ul>
                 <li class="info-list">
@@ -50,7 +50,7 @@ export default {
                 grade:0,  //0 普通用户 1工作人员
                 balance:0.00,
                 phoneNum:15279778477,
-                address:'8#518',
+                address:'南昌大学,8#518',
                 regDate:'2018-11-18',
                 regPhone:15279778477
             }

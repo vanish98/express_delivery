@@ -1,6 +1,6 @@
 <template>
     <div class="newOrder">
-        <person-title>我的订单 >> <em>发布订单</em></person-title>
+        <person-title>当前位置 :: 我的订单 >> <em>发布订单</em></person-title>
         <div class="createNewOrder">
             <el-form :model="ruleForm" 
             :rules="rules" ref="ruleForm" 

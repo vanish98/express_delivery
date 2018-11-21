@@ -4,12 +4,14 @@
             <el-radio-button v-if="isCollapse" :label="false">展开</el-radio-button>
             <el-radio-button v-else :label="true">收起</el-radio-button>
     </el-radio-group>
-    <el-menu default-active="userInformation" 
+    <el-menu 
+    :default-active="openIndex" 
     class="el-menu-vertical-demo"
     @open="handleOpen" 
     @close="handleClose" 
     @select="handleSelect"
     :router='true'
+    ref="leftMenu"
     unique-opened
     :collapse="isCollapse">
         <el-submenu 
@@ -32,10 +34,12 @@
 </template>
 
 <script>
+import {gotoNewOrder} from './user/gotoNewOrder'
   export default {
     data() {
       return {
         isCollapse: false,//默认展开
+        openIndex:'userInformation',
         leftMenuData:[
             {
                 index:"1",
@@ -69,15 +73,21 @@
     },
     methods: {
       handleOpen(key, keyPath) {
-        // console.log(key, keyPath);
+    //    console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
         // console.log(key, keyPath);
       },
       handleSelect(key, keyPath){
-        //   console.log(key,keyPath);
+        //  console.log(key,keyPath);
          // this.isCollapse =true;
       }
+    },
+    mounted() {
+        gotoNewOrder.$on('goNewOrder',index=>{
+            this.$refs.leftMenu.$data.activeIndex = index;
+            
+        });
     }
   }
 </script>

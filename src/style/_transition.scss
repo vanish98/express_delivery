@@ -28,6 +28,12 @@
     @include set-opacity(0);
 }
 
+.opa-mini-enter{
+  @include set-opacity(0);
+}
+.opa-mini-enter-active{
+  @include transition(.6s); 
+}
 
 .moveX-enter-active,
 .moveX-leave-active{

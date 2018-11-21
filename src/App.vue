@@ -126,6 +126,11 @@ html,body,#app{
 }
 textarea::selection,
 input::selection,
+span::selection,
+div::selection,
+a::selection,
+em::selection,
+li::selection,
 h1::selection,
 h2::selection,
 h3::selection,

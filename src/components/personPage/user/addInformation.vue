@@ -1,6 +1,6 @@
 <template>
     <div class="addInformation">
-        <person-title>个人中心 >> <em>完善个人信息</em></person-title>
+        <person-title>当前位置 :: 个人中心 >> <em>完善个人信息</em></person-title>
         <div class="add-infor-cont">
             <el-form :model="ruleForm" 
             :rules="rules" ref="ruleForm" 

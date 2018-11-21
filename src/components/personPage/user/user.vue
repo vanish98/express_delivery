@@ -3,7 +3,9 @@
         <div class="person-user-body">
             <leftMenu></leftMenu>
             <div class="pserson-router-cont">
-                <router-view></router-view>
+                <transition name='opa-mini'>
+                    <router-view></router-view>
+                </transition> 
             </div>
         </div>
     </div>
