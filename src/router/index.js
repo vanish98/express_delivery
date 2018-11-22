@@ -62,7 +62,17 @@ export default new Router({
     },
     {
       path: '/wokerPerson',
-      component:wokerPage 
+      component:wokerPage,
+      children:[
+        {
+          path:'/',
+          redirect:'userInformation'  
+        },
+        {
+          path:'userInformation',
+          component:userInformation 
+        },
+      ] 
     },
     {
       path: '/aboutUs',

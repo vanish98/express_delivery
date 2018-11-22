@@ -43,7 +43,7 @@ export default {
             user:'15279778477',
             login:false,
             showMessage:false,
-            gotoPage:'person'
+            gotoPage:'wokerPerson'
         }
     },
     computed: {

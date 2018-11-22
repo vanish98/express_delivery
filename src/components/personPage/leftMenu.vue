@@ -5,7 +5,7 @@
             <el-radio-button v-else :label="true">收起</el-radio-button>
     </el-radio-group>
     <el-menu 
-    :default-active="openIndex" 
+    default-active="userInformation" 
     class="el-menu-vertical-demo"
     @open="handleOpen" 
     @close="handleClose" 
@@ -15,7 +15,7 @@
     unique-opened
     :collapse="isCollapse">
         <el-submenu 
-        v-for="item in leftMenuData"
+        v-for="item in menuData"
         :key='item.index'
         :index='item.index'>
              <template slot="title">
@@ -36,39 +36,13 @@
 <script>
 import {gotoNewOrder} from './user/gotoNewOrder'
   export default {
+    props:{
+        leftMenuData:Array
+    },
     data() {
       return {
         isCollapse: false,//默认展开
-        openIndex:'userInformation',
-        leftMenuData:[
-            {
-                index:"1",
-                icon:'el-icon-location',
-                title:'个人中心',
-                menuItem:[
-                    {route:'userInformation',listTitle:'我的信息'},
-                    {route:'addInformation',listTitle:'完善个人信息'}
-                ]
-            },
-            {
-                index:"2",
-                icon:'el-icon-menu',
-                title:'我的订单',
-                menuItem:[
-                    {route:'currentOrder',listTitle:'当前订单'},
-                    {route:'newOrder',listTitle:'发布订单'},
-                    {route:'historyOrder',listTitle:'历史订单'}
-                ]
-            },
-            {
-                index:"3",
-                icon:'el-icon-message',
-                title:'我的消息',
-                menuItem:[
-                    {route:'myMessage',listTitle:'消息'}
-                ]
-            }
-        ]
+        menuData:this.leftMenuData
       };
     },
     methods: {

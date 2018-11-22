@@ -102,18 +102,6 @@ export default {
             isnoCompBtn:this.listType.noCompBtn
         }
     },
-    filters:{
-        priceInit(val){
-            if(val.toString().includes('.')){ 
-                if(val.toString().split('.')[1].length ==1){
-                    return val+'0';
-                }
-                return val;
-            }else {
-                 return val+'.00';
-            }    
-        }
-    },
     methods:{
         handleGotoNewOrde(){
             gotoNewOrder.$emit('goNewOrder','newOrder');
@@ -124,10 +112,6 @@ export default {
 </script>
 
 <style lang='scss'>
-    // 删除等操作弹框
-    .el-popup-parent--hidden{
-        padding-right: 0 !important;
-    }
     .el-message{
         top: 5rem;
     }

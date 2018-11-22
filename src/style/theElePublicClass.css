@@ -11,3 +11,7 @@
     padding: 0.6rem 1rem;
     margin-right: 0.5rem;
 }
+/*  删除等操作弹框 */
+.el-popup-parent--hidden{
+    padding-right: 0 !important;
+}

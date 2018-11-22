@@ -1,7 +1,9 @@
 <template>
     <div class="person-user">
         <div class="person-user-body">
-            <leftMenu></leftMenu>
+            <leftMenu
+            :leftMenuData='leftMenuData'>
+            </leftMenu>
             <div class="pserson-router-cont">
                 <transition name='opa-mini'>
                     <router-view></router-view>
@@ -16,6 +18,39 @@ import leftMenu from '../leftMenu'
 export default {
     components:{
         leftMenu
+    },
+    data(){
+        return{
+             leftMenuData:[
+                {
+                    index:"1",
+                    icon:'el-icon-location',
+                    title:'个人中心',
+                    menuItem:[
+                        {route:'userInformation',listTitle:'我的信息'},
+                        {route:'addInformation',listTitle:'完善个人信息'}
+                    ]
+                },
+                {
+                    index:"2",
+                    icon:'el-icon-menu',
+                    title:'我的订单',
+                    menuItem:[
+                        {route:'currentOrder',listTitle:'当前订单'},
+                        {route:'newOrder',listTitle:'发布订单'},
+                        {route:'historyOrder',listTitle:'历史订单'}
+                    ]
+                },
+                {
+                    index:"3",
+                    icon:'el-icon-message',
+                    title:'我的消息',
+                    menuItem:[
+                        {route:'myMessage',listTitle:'消息'}
+                    ]
+                }
+             ]
+        }
     }
 
 }
