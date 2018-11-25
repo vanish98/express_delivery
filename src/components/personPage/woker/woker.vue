@@ -26,7 +26,8 @@ export default {
                     icon:'el-icon-location',
                     title:'个人中心',
                     menuItem:[
-                        {route:'userInformation',listTitle:'我的信息'}
+                        {route:'userInformation',listTitle:'我的信息'},
+                        {route:'wokerAccount',listTitle:'我的钱包'}
                     ]
                 },
                 {
@@ -34,13 +35,20 @@ export default {
                     icon:'el-icon-menu',
                     title:'我的订单',
                     menuItem:[
-                        {route:'currentOrder',listTitle:'当前订单'},
-                        {route:'newOrder',listTitle:'发布订单'},
-                        {route:'historyOrder',listTitle:'历史订单'}
+                        {route:'wokerReceivedOrder',listTitle:'已接订单'},
+                        {route:'wokerHistoryOrder',listTitle:'历史订单'}
                     ]
                 },
                 {
                     index:"3",
+                    icon:'el-icon-tickets',
+                    title:'接单大厅',
+                    menuItem:[
+                        {route:'allUserOrderList',listTitle:'订单列表'}
+                    ]
+                },
+                {
+                    index:"4",
                     icon:'el-icon-message',
                     title:'我的消息',
                     menuItem:[

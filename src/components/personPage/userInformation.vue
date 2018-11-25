@@ -2,39 +2,65 @@
     <div class="userInformation">
         <person-title>当前位置 :: 个人中心 >> <em>我的信息</em></person-title>
         <div class="information-cont">
-            <ul>
+            <ul class="info-body">
                 <li class="info-list">
-                    <span>姓名 : </span>
+                    <!-- background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%); -->
+                    <el-tag
+                    color='#eea2a2'
+                    disable-transitions>姓名 : </el-tag>
                     {{userInformation.userName}}
                 </li>
                 <li class="info-list">
-                    <span>性别 : </span>
+                    <el-tag
+                    color='#6f86d6'
+                    disable-transitions>性别 : </el-tag>
                     {{userInformation.gender==1?'男':'女'}}
                 </li>
                 <li class="info-list">
-                    <span>用户等级 : </span>
+                    <el-tag
+                    color='#57c6e1'
+                    disable-transitions>用户等级 : </el-tag>
                     {{userInformation.grade==0?'普通用户':'工作人员'}}
                 </li>
                 <li class="info-list" v-if="userInformation.grade==1">
-                    <span>用户余额 : </span>
-                     ¥{{userInformation.balance | priceInit}}
+                    <el-tag
+                    color='#b49fda'
+                    disable-transitions>用户余额 : </el-tag>
+                     <el-tag
+                    color='#57c6e1'
+                    disable-transitions>
+                    ¥{{userInformation.balance | priceInit}}</el-tag>
                 </li>
                 <li class="info-list">
-                    <span>联系电话 : </span>
+                    <el-tag
+                    color='#7ac5d8'
+                    disable-transitions>联系电话 : </el-tag>
                     {{userInformation.phoneNum}}
                     <i class="el-icon-setting"
                     @click="dialogFormVisible = true">修改</i>
                 </li>
                 <li class="info-list">
-                    <span>联系地址 : </span>
+                    <el-tag
+                    color='#eea2a2'
+                    disable-transitions>联系地址 : </el-tag>
                     {{userInformation.address}}
                 </li>
                 <li class="info-list">
-                    <span>注册时间 : </span>
+                    <el-tag
+                    color='#eea2a2'
+                    disable-transitions>上次登录 : </el-tag>
                     {{userInformation.regDate}}
                 </li>
                 <li class="info-list">
-                    <span>注册账号: </span>
+                    <el-tag
+                    color='#eea2a2'
+                    disable-transitions>注册时间 : </el-tag>
+                    {{userInformation.regDate}}
+                </li>
+                <li class="info-list">
+                    <el-tag
+                    color='#eea2a2'
+                    disable-transitions>注册账号 : </el-tag>
                     {{userInformation.regPhone}}
                 </li>
             </ul>
@@ -81,7 +107,8 @@ export default {
                 balance:0.00,
                 phoneNum:15279778477,
                 address:'南昌大学,8#518',
-                regDate:'2018-11-18',
+                lastLogin:'2018-11-23 16:52',
+                regDate:'2018-11-18 15:43',
                 regPhone:15279778477
             },
             dialogFormVisible:false,
@@ -124,20 +151,30 @@ export default {
     .el-dialog{
         width: 20rem;
     }
-    ul{
+    .info-body{
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
     }
     .info-list{
         display: block;
-        padding-left: 6rem;
+        padding-left: 2rem;
+        margin-bottom: 1rem;
         min-width: 10rem;
+        width: 50%;
         line-height: 1.5rem;
         text-align: left;
         font-size: 0.8rem;
         color: #3399CC;
+        &:nth-child(2n+1){
+            width: 35%;
+        }
         span{
-            color: #444;
+            color: #fff;
             letter-spacing: 0.05rem;
+            font-size: 0.8rem;
         }
     }
 }

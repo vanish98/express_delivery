@@ -5,7 +5,7 @@
             <el-radio-button v-else :label="true">收起</el-radio-button>
     </el-radio-group>
     <el-menu 
-    default-active="userInformation" 
+    :default-active="defaultActive" 
     class="el-menu-vertical-demo"
     @open="handleOpen" 
     @close="handleClose" 
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {gotoNewOrder} from './user/gotoNewOrder'
+import {gotoNewOrder} from './../../assets/js/gotoNewOrder'
   export default {
     props:{
         leftMenuData:Array
@@ -42,7 +42,8 @@ import {gotoNewOrder} from './user/gotoNewOrder'
     data() {
       return {
         isCollapse: false,//默认展开
-        menuData:this.leftMenuData
+        menuData:this.leftMenuData,
+        defaultActive:'userInformation'
       };
     },
     methods: {
@@ -58,9 +59,14 @@ import {gotoNewOrder} from './user/gotoNewOrder'
       }
     },
     mounted() {
-        gotoNewOrder.$on('goNewOrder',index=>{
-            this.$refs.leftMenu.$data.activeIndex = index;
-            
+        //console.log(this.$route.path.split('/')[2]);
+        let RefreshMenu = this.$route.path.split('/')[2];
+        this.$refs.leftMenu.activeIndex = RefreshMenu;
+        this.defaultActive = RefreshMenu;  
+        gotoNewOrder.$on('goNewOrder',(index,num)=>{
+            this.$refs.leftMenu.activeIndex = index;
+            num && this.$refs.leftMenu.open(num);
+            //console.log( this.$refs.leftMenu.activeIndex);
         });
     }
   }

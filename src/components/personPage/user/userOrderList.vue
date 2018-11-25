@@ -1,16 +1,27 @@
 <template>
     <el-table
     :data="theUserOrder"
+    :default-sort = "{prop: 'createTime', order: 'descending'}"
     style="width: 100%">
-        <div class="emptyTip" slot="empty">
-            暂时没有订单 , 赶紧去
-            <a href="" @click.prevent="handleGotoNewOrde"
-            > 发布订单 </a>吧
-        </div>
-        <el-table-column type="expand" >
+    <div class="emptyTip" slot="empty">
+        暂时没有订单 , 赶紧去
+        <a href="" @click.prevent="handleGotoNewOrde"
+        > 发布订单 </a>吧
+    </div>
+    <el-table-column type="expand" >
         <template slot-scope="props">
             <el-form label-position="left" 
             inline class="demo-table-expand">
+                <el-form-item label="订单号 :" >
+                    <span>{{ props.row.orderId }}</span>
+                </el-form-item>
+                <el-form-item label="发布时间 :" >
+                    <span>{{ props.row.createTime }}</span>
+                </el-form-item>
+                <el-form-item label="完成时间 :" 
+                v-if='props.row.completedData' >
+                    <span>{{ props.row.completedData }}</span>
+                </el-form-item>
                 <el-form-item label="快递类型 :" >
                     <span>{{ props.row.goodsTpye }}</span>
                 </el-form-item>
@@ -31,10 +42,12 @@
                     <span v-for="it in props.row.goodsCode"
                     :key='it'>{{it}}</span>
                 </el-form-item>
-                <el-form-item label="接单人员 :" >
+                <el-form-item label="接单人员 :" 
+                v-if='props.row.courierPeople'>
                     <span>{{ props.row.courierPeople }}</span>
                 </el-form-item>
-                <el-form-item label="接单人电话 :" >
+                <el-form-item label="接单人电话 :" 
+                v-if='props.row.courierPhone'>
                     <span>{{ props.row.courierPhone }}</span>
                 </el-form-item>
                 <el-form-item  label="备注 :" >
@@ -45,19 +58,20 @@
         </template>  
     </el-table-column>
     <el-table-column
-    label="下单时间" 
-    prop="createTime">
+    v-for="item in tabletitleList"
+    :key='item.id'
+    :sortable='item.sortable'
+    :label="item.columnTitle" 
+    :prop="item.prop">
     </el-table-column>
-    <el-table-column
-    label="订单价格(元)" 
-    prop="Price">
-    </el-table-column>
-    <el-table-column
-    label="订单状态" 
-    prop="orderState">
-    </el-table-column>
-    <el-table-column label="交易操作" >
-        <template slot-scope="scope">
+    <el-table-column  align="right">
+         <template slot="header" slot-scope="scope">
+            <el-input
+            v-model="search"
+            size="mini"
+            placeholder="关键词:取货码 |订单号 |类型 |快递公司"/>
+        </template>
+        <template slot-scope="scope"> 
             <template v-if="isnoCompBtn"> 
                 <el-button
                 size="mini"
@@ -88,18 +102,35 @@
 </template>
 
 <script>
-import {gotoNewOrder} from './gotoNewOrder'
+import {gotoNewOrder} from './../../../assets/js/gotoNewOrder'
 export default {
     props:{
         userOrder:Array,
         listType:{
             noCompBtn:Boolean
+        },
+        titleList:{
+                id: Number ,
+                columnTitle: String,
+                prop: String,
+                sortable:Boolean
         }
+        
     },
     data(){
         return{
-            theUserOrder:this.userOrder,
-            isnoCompBtn:this.listType.noCompBtn
+            isnoCompBtn:this.listType.noCompBtn,
+            tabletitleList:this.titleList,
+            search:''
+        }
+    },
+    computed:{
+        theUserOrder(){
+            return this.userOrder.filter(data => !this.search 
+                    || data.goodsCode.toString().includes(this.search)
+                    || data.goodsTpye.toString().includes(this.search)
+                    || data.company.toString().includes(this.search)
+                    || data.orderId.toString().includes(this.search));
         }
     },
     methods:{

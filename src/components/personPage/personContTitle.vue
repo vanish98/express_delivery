@@ -15,9 +15,10 @@ export default {
 <style lang='scss'>
 .person-cont-title{
     position: relative;
-    height: 1.55rem;
-    line-height: 1.55rem;
+    height: 1.50rem;
+    line-height: 1.50rem;
     border-bottom: 1px solid #ccc;
+    background-color: #fff;
     cursor: pointer;
     .p-title{
         text-align: left;

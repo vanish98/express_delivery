@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import {gotoNewOrder} from './../../../assets/js/gotoNewOrder'
 export default {
     data(){
         let trueGoodsNumber=(rule, value, callback) => {
@@ -82,8 +83,6 @@ export default {
         };
         let trueGoodsCode=(rule, value, callback) => {
             if (value) {
-                console.log('66');
-                
                 for(let i=0;i<value.length;i++){
                    if(! /^[0-9]{6}$/.test(value[i]) ){
                         callback(new Error('取货码为6位数字 !'));
@@ -138,7 +137,9 @@ export default {
         // }
         this.$refs[formName].validate((valid) => {
           if (valid) {
-                console.log('提交成功!');          
+                console.log('提交成功!');
+                gotoNewOrder.$emit('goNewOrder','currentOrder');
+                this.$router.push({ path: 'currentOrder' });       
           } else {
             console.log('error submit!!');
             return false;

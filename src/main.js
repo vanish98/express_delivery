@@ -20,12 +20,7 @@ Vue.use(vuescroll,{
 import person_title from './components/personPage/personContTitle'
 Vue.component('person-title', person_title);
 
-Vue.filter('priceInit', function (val) {
-    if(val.toString().includes('.')){ 
-        if(val.toString().split('.')[1].length ==1){ return val+'0'; }
-        return val;
-    }else { return val+'.00'; }    
-});
+Vue.filter('priceInit',value=> '¥'+Number.parseFloat(value).toFixed(2));
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
