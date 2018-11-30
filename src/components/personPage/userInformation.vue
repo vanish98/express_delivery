@@ -29,7 +29,7 @@
                      <el-tag
                     color='#57c6e1'
                     disable-transitions>
-                    ¥{{userInformation.balance | priceInit}}</el-tag>
+                    {{userInformation.balance | priceInit}}</el-tag>
                 </li>
                 <li class="info-list">
                     <el-tag
@@ -49,7 +49,7 @@
                     <el-tag
                     color='#eea2a2'
                     disable-transitions>上次登录 : </el-tag>
-                    {{userInformation.regDate}}
+                    {{userInformation.lastLoginTime}}
                 </li>
                 <li class="info-list">
                     <el-tag
@@ -61,7 +61,7 @@
                     <el-tag
                     color='#eea2a2'
                     disable-transitions>注册账号 : </el-tag>
-                    {{userInformation.regPhone}}
+                    {{userInformation.userId}}
                 </li>
             </ul>
             <div class="changePhone">
@@ -86,31 +86,34 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
     data(){
         return{
             // 请求得到不同用户级别的信息
+            userInformation:{},
             // userInformation:{
             //     userName:'波哥无敌',
             //     gender:1, //1男 0女
             //     grade:0,  //0 普通用户 1工作人员
+            //     phoneNum:15279778477,
+            //     address:'南昌大学,8#518',
+            //     lastLoginTime:'2018-11-23 16:52',
+            //     regDate:'2018-11-18',
+            //     userId:15279778477
+            // },
+            // userInformation:{
+            //     userName:'波哥无敌',
+            //     gender:1, //1男 0女
+            //     grade:1,  //0 普通用户 1工作人员
             //     balance:0.00,
             //     phoneNum:15279778477,
             //     address:'南昌大学,8#518',
-            //     regDate:'2018-11-18',
-            //     regPhone:15279778477
+            //     lastLoginTime:'2018-11-23 16:52',
+            //     regDate:'2018-11-18 15:43',
+            //     userId:15279778477
             // },
-            userInformation:{
-                userName:'波哥无敌',
-                gender:1, //1男 0女
-                grade:1,  //0 普通用户 1工作人员
-                balance:0.00,
-                phoneNum:15279778477,
-                address:'南昌大学,8#518',
-                lastLogin:'2018-11-23 16:52',
-                regDate:'2018-11-18 15:43',
-                regPhone:15279778477
-            },
             dialogFormVisible:false,
             formPhone: {
                 newPhone:''
@@ -123,15 +126,47 @@ export default {
             }
         }
     },
+    mounted(){
+        this.getUserInfo();
+    },
+    computed:{
+        ...mapState({
+            userId:state=>state.user.userInfo.userId
+        })
+    },
     methods:{
+        getUserInfo(){
+            axios.get(`/users/userInformation?userId=${this.userId}`).then(response=>{
+                let res = response.data;
+                if(res.status=='0'){
+                    this.userInformation = res.result;
+                }else{
+                    console.log(res.msg);    
+                }
+            }).catch(err=>{
+                console.log(err);
+                
+            })
+        },
         handleChangePhone(formName){   
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     this.dialogFormVisible = false;
-                    console.log('修改成功 '+this.formPhone.newPhone);
-                    
-                    // this.$emit('changePhone',this.formPhone.newPhone);
-                    // 通过vuex 或者直接这里掉接口
+                    axios.get(`/users/userInformation/ChangePhone?phoneNum=${this.formPhone.newPhone}`)
+                    .then(response=>{
+                        let res = response.data;
+                        if(res.status=='0'){
+                            this.$message({
+                                message: '恭喜你，修改成功!',
+                                type: 'success'
+                            });
+                            this.getUserInfo();
+                        }else{
+                            console.log(res.msg);    
+                        }
+                    }).catch(err=>{
+                        console.log(err); 
+                    })      
                 } else {
                     return false;
                 }

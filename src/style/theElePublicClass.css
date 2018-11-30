@@ -15,3 +15,7 @@
 .el-popup-parent--hidden{
     padding-right: 0 !important;
 }
+/* // 登录成功或者失败提示框 */
+    .el-notification{
+        top: 5rem !important;
+}

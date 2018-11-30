@@ -26,31 +26,87 @@
         <div class="usercont">
             <img src="../assets/img/top-user.png" alt="用户头像">
             <div class="username">
-                <em>{{user}}</em>
+                <em v-if='userName'>{{userName}}</em>
+                <em v-else>未登录</em>
             </div>
         </div>
         <div class="login-and-exit">
-            <a v-if="!login" href="javascript:void(0);">登录</a>
-            <a v-else href="javascript:void(0);">退出</a>
+            <a v-if="!loginState" 
+            @click.prevent="handleUserLogin">登录</a>
+            <a v-else 
+            @click.prevent="logout">退出</a>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
     data(){
         return{
-            user:'15279778477',
-            login:false,
+            loginState:false,
             showMessage:false,
-            gotoPage:'wokerPerson'
+            gotoPage:'person'
         }
     },
     computed: {
+        ...mapState({
+            userId:state=>state.user.userInfo.userId,
+            vuexUserName:state=>state.user.userInfo.userName
+        }),
         currentPage(){         
             return this.$route.path.split('/')[1];
+        },
+        userName(){
+            if(this.vuexUserName !='' && this.vuexUserName!='undefined'){
+                return this.vuexUserName
+            }else if(this.userId !='' && this.userId!='undefined'){
+                return this.userId
+            }else{
+                return false
+            }
+            
         }
     },
+    mounted(){
+        this.checkLogin();
+    },
+    methods:{
+        handleUserLogin(){
+            this.$router.push({path:'/login'});
+        },
+        checkLogin(){
+            axios.get("/users/checkLogin").then((response)=>{
+                    let res = response.data;
+                    if(res.status=="0"){
+                        this.loginState=true;
+                        this.$store.commit("saveUserInfo",res.result);
+                    }else{
+                      console.log(res.msg);                      
+                    }
+            }).catch(err=>{
+                console.log(err);
+                
+            })
+        },
+        logout(){
+             axios.post("/users/logout").then((response)=>{
+                    let res = response.data;
+                    if(res.status=="0"){
+                        this.loginState=false;
+                        this.$store.commit("saveUserInfo",{userId:'',userName:''});
+                        console.log('退出成功');   
+                        this.handleUserLogin();    
+                    }else{
+                      console.log(res.msg);                      
+                    }
+            }).catch(err=>{
+                console.log(err);
+                
+            })
+        }
+    }
 }
 </script>
 
@@ -71,7 +127,7 @@ $header-height:3rem;
     width: 100%;
     background-color: #409EFF;
     color: #fff;
-    @include transition(.4s);
+    @include transition(.3s);
     z-index: 9999;
 }
 .logo{

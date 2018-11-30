@@ -1,9 +1,10 @@
 <template>
 <div id="app">   
 
-    <appHeader
-    data='header'
-    :class="{hiddenHeader}"></appHeader> 
+    <router-view 
+    :class="{hiddenHeader}"
+    name="header">
+    </router-view>
 
     <vue-scroll 
     ref='scroll'
@@ -115,13 +116,13 @@ html,body,#app{
     right: 0;
 }
 .__vuescroll{
-  @include transition(.6s);
+  @include transition(.3s);
 }
 .mgtop{
   @include translateY(-3rem);
 }
-.header.hiddenHeader[data]{
-    @include transition(.8s); 
+.header.hiddenHeader{
+    @include transition(1s); 
     @include translateY(-100%);
 }
 textarea::selection,

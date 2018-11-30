@@ -134,6 +134,8 @@
   }
 }
 
+.transX-fast-leave-to,
+.transX-fast-enter,
 .transX-leave-to,
 .transX-enter {
   -ms-transform: translateX(100px);
@@ -155,6 +157,18 @@
   transition: 1s;
 }
 
+.transX-fast-enter-active,
+.transX-fast-leave-active,
+.transX-re-fast-enter-active,
+.transX-re-fast-leave-active {
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.transX-re-fast-leave-to,
+.transX-re-fast-enter,
 .transX-re-leave-to,
 .transX-re-enter {
   -ms-transform: translateX(-100px);

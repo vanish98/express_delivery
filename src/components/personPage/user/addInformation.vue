@@ -8,8 +8,10 @@
             @submit.native.prevent
             :status-icon='true'
             label-width="5rem" class="demo-ruleForm">
-                <el-form-item label="姓名 : " prop="name">
-                    <el-input v-model.trim="ruleForm.name"></el-input>
+                <el-form-item label="姓名 : " prop="userName">
+                    <el-input 
+                    placeholder="为了安全,不可二次修改!"
+                    v-model.trim="ruleForm.userName"></el-input>
                 </el-form-item> 
                 <el-form-item label="性别 : " prop="gender">
                     <el-radio-group v-model.number="ruleForm.gender">
@@ -17,14 +19,17 @@
                     <el-radio :label="0">女</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item label="联系电话 : " prop="phone">
-                    <el-input v-model="ruleForm.phone"></el-input>
+                <el-form-item label="联系电话 : " prop="phoneNum">
+                    <el-input v-model="ruleForm.phoneNum"></el-input>
                 </el-form-item> 
                 <el-form-item label="联系地址 : " prop="address">
-                    <el-input v-model="ruleForm.address"></el-input>
+                    <el-input
+                    placeholder="输入您的联系地址便于配送"
+                     v-model="ruleForm.address"></el-input>
                 </el-form-item> 
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
+                    <el-button type="primary"
+                     @click="submitForm('ruleForm')">修改</el-button>
                     <el-button  @click="resetForm('ruleForm')">重置</el-button>
                 </el-form-item>
             </el-form>
@@ -33,6 +38,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data() {
         let regexpPhoneNumber=(rule, value, callback) => {
@@ -46,20 +52,20 @@ export default {
         };
       return {
         ruleForm: {
-          name: '',
-          phone:'',
+          userName: '',
+          phoneNum:'',
           gender:1,
           address:''
         },
         rules: {
-          name: [
+          userName: [
             { required: true, message: '请输入名字', trigger: 'blur' },
             { min: 2, max: 6, message: '长度在 3 到 6 个字符', trigger: 'change' },
             { min: 2, max: 6, message: '长度在 3 到 6 个字符', trigger: 'blur' },
             { pattern:/\D/, message: '不能为纯数字', trigger: 'change' },
             { pattern:/\D/, message: '不能为纯数字', trigger: 'blur' }
           ],
-          phone: [
+          phoneNum: [
             { required: true, message: '请输入您的联系方式'},
             { validator: regexpPhoneNumber, trigger: 'change'},
             { validator: regexpPhoneNumber, trigger: 'blur'}
@@ -73,11 +79,41 @@ export default {
         }
       };
     },
+    mounted() {
+        this.ruleForm.phoneNum = this.$store.state.user.userInfo.userId;
+    },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+               let addInfo = {
+                   userName:this.ruleForm.userName,
+                   phoneNum:this.ruleForm.phoneNum,
+                   gender:this.ruleForm.gender,
+                   address:this.ruleForm.address
+               }
+                axios.post(`/users/addInformation`,addInfo).then(response=>{
+                    let res = response.data;
+                    if(res.status=='0'){
+                         this.$notify({
+                            title: '修改成功',
+                            message: '恭喜你! 修改成功!',
+                            duration:2000,
+                            type: 'success'
+                        });
+                        this.$router.push({path:'person/userInformation'});
+                    }else{
+                        this.$notify({
+                            title: '修改失败',
+                            message:res.msg,
+                            duration:2000,
+                            type: 'error'
+                        });  
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                    
+                })
           } else {
             return false;
           }

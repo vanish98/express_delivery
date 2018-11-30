@@ -77,7 +77,10 @@ export default {
                 this.$refs.mySwiper.swiper.autoplay.start();
             } catch (error) { }
         }
-    }
+    },
+    destroyed() {
+        this.swiperOption={};
+    },
 }
 </script>
 

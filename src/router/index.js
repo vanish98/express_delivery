@@ -1,21 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import appHome from '../components/home/home'
-import aboutUs from '../components/aboutUs/aboutUs'
-import customerService from '../components/customerService/customerService'
-import suggest from '../components/suggest/suggest'
-import userPage from '../components/personPage/user/user'
-import userInformation from '../components/personPage/userInformation'
-import addInformation from '../components/personPage/user/addInformation'
-import currentOrder from '../components/personPage/user/currentOrder'
-import newOrder from '../components/personPage/user/newOrder'
-import historyOrder from '../components/personPage/user/historyOrder'
-import myMessage from '../components/personPage/myMessage'
-import wokerPage from '../components/personPage/woker/woker'
-import wokerAccount from '../components/personPage/woker/wokerAccount'  
-import wokerReceivedOrder from '../components/personPage/woker/wokerReceivedOrder' 
-import wokerHistoryOrder from '../components/personPage/woker/wokerHistoryOrder' 
-import allUserOrderList from '../components/personPage/woker/allUserOrderList' 
+import loginRegister from '@cts/loginRegister/loginRegister'
+import login from '@cts/loginRegister/login'
+import register from '@cts/loginRegister/register'
+import forgotPassword from '@cts/loginRegister/forgotPassword'
+import appHeader from '@cts/appHeader'
+import appHome from '@cts/home/home'
+import aboutUs from '@cts/aboutUs/aboutUs'
+import customerService from '@cts/customerService/customerService'
+import suggest from '@cts/suggest/suggest'
+import userPage from '@ctsPage/user/user'
+import userInformation from '@ctsPage/userInformation'
+import addInformation from '@ctsPage/user/addInformation'
+import currentOrder from '@ctsPage/user/currentOrder'
+import newOrder from '@ctsPage/user/newOrder'
+import historyOrder from '@ctsPage/user/historyOrder'
+import myMessage from '@ctsPage/myMessage'
+import wokerPage from '@ctsPage/woker/woker'
+import wokerAccount from '@ctsPage/woker/wokerAccount'  
+import wokerReceivedOrder from '@ctsPage/woker/wokerReceivedOrder' 
+import wokerHistoryOrder from '@ctsPage/woker/wokerHistoryOrder' 
+import allUserOrderList from '@ctsPage/woker/allUserOrderList' 
 
 Vue.use(Router)
 
@@ -28,11 +33,47 @@ export default new Router({
     {
       path: '/home',
       name:'appHome',
-      component:appHome
+      components:{
+        default:appHome,
+        header:appHeader
+      }
+    },
+    {
+      path: '/login',
+      component:loginRegister,
+      children:[
+          { 
+            path:'/',
+            component:login
+          }
+      ]  
+    },
+    {
+      path: '/register',
+      component:loginRegister,
+      children:[
+        { 
+          path:'/',
+          component:register
+        }
+      ] 
+    },
+    {
+      path: '/forgotPassword',
+      component:loginRegister,
+      children:[
+        { 
+          path:'/',
+          component:forgotPassword
+        }
+      ] 
     },
     {
       path: '/person',
-      component:userPage,
+      components:{
+        default:userPage,
+        header:appHeader
+      },
       children:[
         {
           path:'/',
@@ -66,7 +107,10 @@ export default new Router({
     },
     {
       path: '/wokerPerson',
-      component:wokerPage,
+      components:{
+        default:wokerPage,
+        header:appHeader
+      },
       children:[
         {
           path:'/',
@@ -101,17 +145,26 @@ export default new Router({
     {
       path: '/aboutUs',
       name:'aboutUs',
-      component:aboutUs
+      components:{
+        default:aboutUs,
+        header:appHeader
+      }
     },
     {
       path: '/customerService',
       name:'customerService',
-      component:customerService 
+      components:{
+        default:customerService,
+        header:appHeader
+      }
     },
     {
       path: '/suggest',
       name:'suggest',
-      component:suggest
+      components:{
+        default:suggest,
+        header:appHeader
+      }
     }
   ]
 })
