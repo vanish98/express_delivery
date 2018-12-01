@@ -115,6 +115,10 @@ html,body,#app{
 .el-badge__content.is-fixed.is-dot{
     right: 0;
 }
+//全局消息提示框
+.el-message{
+  top: 5rem;
+}
 .__vuescroll{
   @include transition(.3s);
 }

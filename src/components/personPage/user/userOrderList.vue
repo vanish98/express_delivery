@@ -11,7 +11,7 @@
     <el-table-column type="expand" >
         <template slot-scope="props">
             <el-form label-position="left" 
-            inline class="demo-table-expand">
+            inline class="userTable">
                 <el-form-item label="订单号 :" >
                     <span>{{ props.row.orderId }}</span>
                 </el-form-item>
@@ -169,7 +169,8 @@ export default {
         margin-left: 0;
     }
     // 展开详情后文本 的span
-    .el-form-item__content span{
+    .historyOrder .el-form-item__content span,
+    .currentOrder .el-form-item__content span{
         margin-right: 0.5rem;
     }
     .demo-table-expand {

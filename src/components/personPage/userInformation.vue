@@ -87,7 +87,7 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 export default {
     data(){
         return{
@@ -126,18 +126,20 @@ export default {
             }
         }
     },
+    // computed:{
+    //     ...mapState({
+    //         userId:state=>state.user.userInfo.userId
+    //     })
+    // },
     mounted(){
         this.getUserInfo();
     },
-    computed:{
-        ...mapState({
-            userId:state=>state.user.userInfo.userId
-        })
-    },
     methods:{
         getUserInfo(){
-            axios.get(`/users/userInformation?userId=${this.userId}`).then(response=>{
+            let loading = this.$loading({lock:true,text:'玩命加载中...'});
+            axios.get(`/users/userInformation`).then(response=>{
                 let res = response.data;
+                loading.close();
                 if(res.status=='0'){
                     this.userInformation = res.result;
                 }else{

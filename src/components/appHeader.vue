@@ -46,17 +46,24 @@ export default {
     data(){
         return{
             loginState:false,
-            showMessage:false,
-            gotoPage:'person'
+            showMessage:false
         }
     },
     computed: {
         ...mapState({
             userId:state=>state.user.userInfo.userId,
+            grade:state=>state.user.userInfo.grade,
             vuexUserName:state=>state.user.userInfo.userName
         }),
         currentPage(){         
             return this.$route.path.split('/')[1];
+        },
+        gotoPage(){
+            if(this.grade==0){
+                return 'person'
+            }else if(this.grade==1){
+                return 'wokerPerson'
+            }
         },
         userName(){
             if(this.vuexUserName !='' && this.vuexUserName!='undefined'){

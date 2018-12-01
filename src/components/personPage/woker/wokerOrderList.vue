@@ -1,7 +1,8 @@
 <template>
     <el-table
     :data="theUserOrder"
-    :border='false'
+    :border='true'
+    class="wokerOrderList"
     :default-sort = "{prop: 'createTime', order: 'descending'}"
     style="width: 100%">
     <div class="emptyTip" slot="empty">
@@ -19,26 +20,30 @@
                 <el-form-item label="订单状态 :" >
                     <span>{{ props.row.orderState }}</span>
                 </el-form-item>
-                <template v-if="props.row.orderState!='待接单'">
+                <template v-if="props.row.orderState!='未接单'">
                     <el-form-item label="订单号 :" >
                         <span>{{ props.row.orderId }}</span>
                     </el-form-item>
-                    <el-form-item label="发布人员 :" 
-                    v-if='props.row.createOrderPeople'>
+                    <el-form-item label="发布人员 :" >
                         <span>{{ props.row.createOrderPeople }}</span>
                     </el-form-item>
-                    <el-form-item label="联系电话 :" 
-                    v-if='props.row.createOrderPeoplePhone'>
+                    <el-form-item label="联系电话 :" >
                         <span>{{ props.row.createOrderPeoplePhone }}</span>
                     </el-form-item>
                     <el-form-item label="取货码 :" >
                         <span v-for="it in props.row.goodsCode"
                         :key='it'>{{it}}</span>
                     </el-form-item>
+                    <el-form-item label="收货地址 :" >
+                        <span>{{ props.row.address }}</span>
+                    </el-form-item>
                 </template>
                 <el-form-item label="快递公司 :" >
                     <span v-for="it in props.row.company"
                     :key='it'>{{it}}</span>
+                </el-form-item>
+                <el-form-item label="快递数量 :" >
+                    <span>{{ props.row.goodsNumber }} 个</span>
                 </el-form-item>
                 <el-form-item label="完成时间 :" 
                 v-if='props.row.completedData' >
@@ -52,9 +57,6 @@
                 </el-form-item>
                 <el-form-item label="订单价格 :" >
                     <span>{{ props.row.Price | priceInit }} 元</span>
-                </el-form-item>
-                <el-form-item label="快递数量 :" >
-                    <span>{{ props.row.goodsNumber }} 个</span>
                 </el-form-item>
                 <el-form-item  label="备注 :" >
                     <span>{{ props.row.remarks }}</span>
@@ -73,7 +75,6 @@
     <el-table-column
       prop="goodsSize"
       label="大小"
-      width="100"
       :filters="goodsSizeList"
       :filter-method="filterGoodsSize"
       filter-placement="bottom-end">
@@ -170,6 +171,10 @@ export default {
 </script>
 
 <style lang='scss'>
+.wokerOrderList{
+    td{
+        border-right: none;
+    }
     .el-message{
         top: 5rem;
     }
@@ -192,6 +197,10 @@ export default {
             color: rgb(214, 29, 29);
         }
     }
+    //大小 这列
+    .goodsSize{
+        width: 4rem;
+    }
     .el-button+.el-button{
         margin-left: 0;
     }
@@ -211,5 +220,6 @@ export default {
         margin-bottom: 0;
         width: 50%;
     }
+}
 </style>
 

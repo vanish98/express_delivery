@@ -2,47 +2,74 @@
     <div class="myMessage">
         <person-title>我的消息 >> <em>消息</em></person-title>
         <div class="myMessage-cont">
-            <el-collapse v-model="activeName" accordion>
-            <el-collapse-item 
-            v-for='item in userMessage'
-            :key='item.id'
-            :title="item.title"
-            :name="item.id">
-                <template slot="title">
-                  <i class="el-icon-message"></i>
-                  {{item.title}}
-                </template>
-                <p class="msg-body">{{item.msg}}</p>
-            </el-collapse-item>
+            <el-collapse 
+            @change="handleReadMsg"
+            v-model="activeName" accordion>
+                <el-collapse-item 
+                v-for='item in userMessage'
+                :key='item.sendTime'
+                :class="{'messageIsRead':item.isRead}"
+                :title="item.title"
+                :name="item.title">
+                    <template slot="title">
+                    <i class="el-icon-message"></i>
+                    {{item.title}}
+                    ( {{item.isRead ? '已读' : '未读'}} )
+                    </template>
+                    <p class="msg-body">
+                        {{item.cont}} <br>
+                        <span>(发送时间 : {{item.sendTime}})</span>
+                    </p>
+                </el-collapse-item>
             </el-collapse>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
             activeName: '',
-            userMessage:[
-                {
-                    id:1,
-                    title:'欢迎新用户',
-                    msg:'欢迎使用校园闪电侠'
-                },
-                {
-                    id:2,
-                    title:'恭喜成为会员',
-                    msg:'恭喜你成为会员,您享有1000个优惠特权哦!'
-                },
-                {
-                    id:3,
-                    title:'用户反馈信息',
-                    msg:`您的反馈信息我们已经收到,
-                    很感谢您的建议!对于您说的问题我们将进行解决`
+            lastClick:[],
+            userMessage:[] 
+        }
+    },
+    mounted() {
+        this.getMessage();
+    },
+    methods:{
+        getMessage(){
+            axios.get('/users/userMessage').then(response=>{
+                let res = response.data;
+                if(res.status=='0'){
+                    this.userMessage = res.result;
+                }else{
+                    this.$message({
+                        type: 'error',
+                        message:res.msg
+                    });  
                 }
-            ]
-            
+            }).catch(err=>{
+                console.log(err);
+            })
+        },
+        handleReadMsg(data){   
+            let flag = this.lastClick.every(it=>it!=data);
+            if(data !='' && flag){
+                this.lastClick.push(data); //记录已点击后的 
+                axios.get(`/users/readMessage?title=${data}`).then(response=>{
+                let res = response.data;
+                    if(res.status=='0'){
+                        this.getMessage();
+                    }else{
+                        console.log(res.msg);  
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                });
+            } 
         }
     }
 }
@@ -59,7 +86,10 @@ export default {
     .el-collapse-item__header{
         font-size: 0.8rem;
         padding-left: 2rem;
-        color: rgb(85, 192, 211);
+        color: rgb(85, 192, 211); //未读消息标题颜色
+    }
+    .messageIsRead .el-collapse-item__header{
+        color: #999; //已读消息标题颜色
     }
     // 内容框
     .el-collapse-item__content{

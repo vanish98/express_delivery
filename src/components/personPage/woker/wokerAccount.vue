@@ -12,7 +12,12 @@
                     <el-radio v-model="alipayType" label="银行卡">银行卡</el-radio>
                 </div>
                 <div class="alipayAccount">
-                    <el-select v-model="alipayAccount" placeholder="请选择账号">
+                    <el-select v-model="alipayAccount" 
+                    filterable allow-create
+                    default-first-option
+                    @focus="alipayErrorTip=''"
+                    @change='handleValidate'
+                    placeholder="请选择账号(可输入)">
                         <el-option
                         v-for="item in alipayAccountType"
                         :key="item.value"
@@ -20,6 +25,7 @@
                         :value="item.value">
                         </el-option>
                     </el-select>
+                    <span class="errorTip">{{alipayErrorTip}}</span>
                 </div>
                 <div class="cashWithDrawNum">
                     <h4 class="title">提现金额 : </h4>
@@ -41,30 +47,18 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
-            balance:33.00,
+            balance:0.00,
             alipayType: '支付宝',
-            alipayAccountzhiFuBao: [
-                {
-                    value: '15279778477'
-                }, 
-                {
-                    value: '15278789455'
-                }
-            ],
-            alipayAccountBankCard:[
-                {
-                    value: '6217998455122235453'
-                }, 
-                {
-                    value: '6557465436622238475'
-                }
-            ],
+            alipayAccountzhiFuBao:[],
+            alipayAccountBankCard:[],
             alipayAccount: '',
             WithDrawNum:'',
-            errorTip:''
+            errorTip:'',
+            alipayErrorTip:''
         }
     },
     computed:{
@@ -95,15 +89,76 @@ export default {
             return value.toString().replace(/,/g,'');
         }
     },
+    mounted() {
+        this.getBalance();
+    },
     methods:{
-        handleCashWithDraw(){
-            if(this.balance>0 && this.errorTip=='' && this.alipayAccount!='' && this.WithDrawNum!=''){
-                this.$notify({
-                title: '成功',
-                message: '提现申请成功!',
-                type: 'success'
-                });
+        getBalance(){
+            let loading = this.$loading({lock:true,text:'玩命加载中...'});
+            axios.get(`/wokers/balance`).then(response=>{
+                let res = response.data;
+                loading.close();
+                if(res.status=='0'){
+                    this.balance = res.result.balance;
+                    this.alipayAccountBankCard = res.result.alipayAccountBankCard;
+                    this.alipayAccountzhiFuBao = res.result.alipayAccountzhiFuBao;
+                }else{
+                    console.log(res.msg);    
+                }
+            }).catch(err=>{
+                console.log(err);
+                
+            });
+        },
+        handleValidate(){
+            if(this.alipayType=='支付宝'){
+                let fg1 = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.alipayAccount) ,
+                    fg2 = /^\d{11}$/.test(this.alipayAccount),
+                    flag = fg1 || fg2;  
+                  if(!flag){ this.alipayErrorTip='支付宝账号格式不对!' }
+                  else{ this.alipayErrorTip =''}
+              return flag;
+            }else if(this.alipayType=='银行卡'){
+                let flag = /^\d{16,19}$/.test(this.alipayAccount)  
+                  if(!flag){ this.alipayErrorTip='银行卡账号格式不对!' }
+                  else{ this.alipayErrorTip =''}
+              return flag;
             }else{
+                return false
+            }
+
+        },
+        handleCashWithDraw(){     
+            let trueAlipay =  this.handleValidate();
+            let loading = this.$loading({lock:true,text:'玩命加载中...'});
+            if(this.balance>0 && trueAlipay && this.errorTip=='' && this.alipayErrorTip=='' && this.alipayAccount!='' && this.WithDrawNum!=''){
+                let param = {
+                    alipayType : this.alipayType,
+                    alipayAccount : this.alipayAccount,
+                    WithDrawNum : this.WithDrawNum
+                }
+                axios.post('/wokers/cashWithDraw',param).then(response=>{
+                    let res = response.data;
+                    loading.close();
+                    if(res.status=='0'){
+                        this.getBalance();
+                        this.$notify({
+                            title: '成功',
+                            message: '提现申请成功!',
+                            type: 'success'
+                        });
+                    }else{
+                        this.$notify({
+                            title: '失败',
+                            message:res.msg,
+                            type: 'error'
+                        });  
+                    }
+                }).catch(err=>{
+                    console.log(err);
+                })
+            }else{
+                loading.close();
                 this.$notify({
                 title: '失败',
                 message: '不满足条件,提现申请失败!',
@@ -139,9 +194,11 @@ $text-color:#777;
 }
 .wokerAccount{
     height: 100%;
+    overflow: hidden;
 }
 .wokerAccount-cont{
     position: relative;
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     padding-top: 2rem;
@@ -187,6 +244,14 @@ $text-color:#777;
         }
         
     }
+    .errorTip{
+        display: block;
+        height: 1rem;
+        margin-top: 0.3rem;
+        font-size: 0.7rem;
+        color: rgb(245, 66, 66);
+        letter-spacing: 0.1rem;
+    }
 }
 // .CashWithDrawType{
     
@@ -198,15 +263,7 @@ $text-color:#777;
     margin-bottom: 1.5rem;
     .money{
         width: 11rem;
-    }
-    .errorTip{
-        display: block;
-        height: 1rem;
-        margin-top: 0.3rem;
-        font-size: 0.7rem;
-        color: rgb(245, 66, 66);
-        letter-spacing: 0.1rem;
-    }
+    }  
 }
 
 </style>

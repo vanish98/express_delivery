@@ -35,6 +35,12 @@
                         <span class="randomCode">{{randomCode}}</span>
                     </div>
                 </div>
+                <el-form-item label="级别 : " class="grade" prop="grade">
+                    <el-radio-group v-model.number="loginForm.grade">
+                    <el-radio :label="0">普通用户</el-radio>
+                    <el-radio :label="1">工作人员</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary"
                     @click="submitForm('loginForm')">登录</el-button>
@@ -53,13 +59,13 @@
 import axios from 'axios'
 export default {
   data(){
-        let validateCode =(rule, value, callback) => {
-            if (this.randomCode!=this.$data.loginForm.validateCode) {
-                  callback(new Error('验证码不正确 !'));
-            }else{
-                 callback();
-            }
-        };
+        // let validateCode =(rule, value, callback) => {
+        //     if (this.randomCode!=this.$data.loginForm.validateCode) {
+        //           callback(new Error('验证码不正确 !'));
+        //     }else{
+        //          callback();
+        //     }
+        // };
         return{
             inputType:'password',
             randomCode:'',
@@ -67,7 +73,8 @@ export default {
             loginForm:{
                 userId:'',
                 passWord:'',
-                validateCode:''
+                validateCode:'',
+                grade:0
             },
             loginRules:{
                 userId:[
@@ -77,11 +84,11 @@ export default {
                 passWord:[
                     { required: true, message: '请输入密码', trigger: 'blur' }
                 ],
-                validateCode:[
-                    { required: true, message: '请输入验证码', trigger: 'blur' },
-                    { validator: validateCode , trigger: 'blur'},
-                    { validator: validateCode , trigger: 'change'}                   
-                ]
+                // validateCode:[
+                //     { required: true, message: '请输入验证码', trigger: 'blur' },
+                //     { validator: validateCode , trigger: 'blur'},
+                //     { validator: validateCode , trigger: 'change'}                   
+                // ]
             },
             validateCodeImg:[
                 './static/img/login-Verification-1.png',
@@ -109,34 +116,40 @@ export default {
             this.codeImg=this.randomCodeimg();
             this.randomCode=this.randomNum();
         },
+        userLogin(router,data){
+            axios.post(router,data).then(response=>{
+                let res = response.data;                  
+                if(res.status=='0'){
+                    this.$notify({
+                        title: '登录成功',
+                        message: '恭喜你! 登录成功!',
+                        duration:2000,
+                        type: 'success'
+                    });
+                    this.$router.push({path:'/home'});
+                }else{
+                    this.$notify({
+                        title: '登录失败',
+                        message:res.msg,
+                        duration:2000,
+                        type: 'error' 
+                    });
+                }
+            }).catch(err=>{
+                console.log(err);               
+            }); 
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                 let userPost = {
                     userId:this.loginForm.userId,
-                    passWord:this.loginForm.passWord
+                    passWord:this.loginForm.passWord,
+                    grade:this.loginForm.grade
                 };
-                axios.post('/users/login',userPost).then(response=>{
-                    let res = response.data;                  
-                    if(res.status=='0'){
-                        this.$notify({
-                            title: '登录成功',
-                            message: '恭喜你! 登录成功!',
-                            duration:2000,
-                            type: 'success'
-                        });
-                        this.$router.push({path:'/home'});
-                    }else{
-                        this.$notify({
-                            title: '登录失败',
-                            message:res.msg,
-                            duration:2000,
-                            type: 'error' 
-                        });
-                    }
-                }).catch(err=>{
-                    console.log(err);               
-                })  
+                //判断用户级别  这样做是因为用的mongodb数据库,
+                //分了普通用户和工作人员两个集合,如果用一个集合数据就会太混乱
+                this.userLogin('/users/login',userPost);
             } else {
                 console.log('error submit!!');
                 return false;
@@ -157,7 +170,7 @@ export default {
     width: 100%;
     height: 100%;
     .top-header-cont{
-        padding-top: 2rem;
+        padding-top: 1rem;
         .head-pic{
             overflow: hidden;
             width: 4.5rem;
@@ -172,9 +185,12 @@ export default {
     }
     .form-cont{
         width: 90%;
-        margin-top: 2rem;
+        margin-top: 1rem;
         .el-form-item{
-            margin-bottom: 1.1rem;
+            margin-bottom: 0.9rem;
+            &.grade{
+                margin-bottom: 0.3rem;
+            }
         }
         .rightCode{
             position: relative;
@@ -184,7 +200,7 @@ export default {
             text-align: right;
             width: 100%;
             margin-top: 0.2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             cursor: pointer;
         }
         .rightCode-cont{

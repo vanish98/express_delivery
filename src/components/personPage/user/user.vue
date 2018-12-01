@@ -10,14 +10,17 @@
                 </transition> 
             </div>
         </div>
+        <appFooter></appFooter>
     </div>
 </template>
 
 <script>
 import leftMenu from '../leftMenu'
+import appFooter from '../../appFooter'
 export default {
     components:{
-        leftMenu
+        leftMenu,
+        appFooter
     },
     data(){
         return{
@@ -66,7 +69,7 @@ export default {
     position: relative;
     display: flex;
     width: 80%;
-    margin: 0 auto; 
+    margin: 0 auto 5rem; 
 }
 .pserson-router-cont{
     width: 100%;

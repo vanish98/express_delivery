@@ -24,6 +24,12 @@
                     <el-input v-model="forgotForm.questionAnswer"
                     placeholder="您设置的密保答案"></el-input>
                 </el-form-item>
+                <el-form-item label="级别 : " class="grade" prop="grade">
+                    <el-radio-group v-model.number="forgotForm.grade">
+                    <el-radio :label="0">普通用户</el-radio>
+                    <el-radio :label="1">工作人员</el-radio>
+                    </el-radio-group>
+                </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('forgotForm')">找回</el-button>
                     <el-button @click="resetForm('forgotForm')">重置</el-button>
@@ -51,7 +57,8 @@ export default {
             forgotForm:{
                 userId:'',
                 passwordQuestion:'',
-                questionAnswer:''
+                questionAnswer:'',
+                grade:0
             },
             forgotFormRules:{
                 userId:[
@@ -74,7 +81,8 @@ export default {
                  let userPost = {
                     userId:this.forgotForm.userId,
                     passwordQuestion:this.forgotForm.passwordQuestion,
-                    questionAnswer:this.forgotForm.questionAnswer
+                    questionAnswer:this.forgotForm.questionAnswer,
+                    grade:this.forgotForm.grade
                 };
                 axios.post('/users/forgotPassWord',userPost).then(response=>{
                     let res = response.data;                  
