@@ -3,7 +3,6 @@
         <person-title>当前位置 :: 接单大厅 >> <em>订单列表</em></person-title>
         <div class="allUserOrderList-cont">
                 <wokerOrderList
-                v-loading="loading"
                 :userOrder='notReceiveOrder'
                 :rightOptBtn='rightOptBtn'
                 :titleList='titleList'
@@ -20,7 +19,6 @@ import {gotoNewOrder} from './../../../assets/js/gotoNewOrder'
 export default {
     data(){
         return {
-            loading:true,
             notReceiveOrder:[],
             rightOptBtn:'notReceiveBtn',// 'receiveOrderBtn'  // 'historyBtn'    
             titleList:[
@@ -36,7 +34,6 @@ export default {
         wokerOrderList
     },
     mounted() {
-        setTimeout(()=>this.loading=false,600);
         this.getAllUserOrderList();
     },
     methods:{
@@ -55,7 +52,7 @@ export default {
                 
             });
         },
-        handleReceiveOrder(data){
+        handleReceiveOrder(orderData){
             // 接单后不可以取消
             this.$confirm('接收订单后不可取消, 是否接单?', 
                 '接收订单', {
@@ -63,12 +60,26 @@ export default {
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.$message({
-                    type: 'success',
-                    message: '接单成功!'
+                let loading = this.$loading({lock:true,text:'玩命加载中...'});
+                axios.post(`/wokers/receiveOrder`,orderData).then(response=>{
+                    let res = response.data;
+                   loading.close();
+                    if(res.status=='0'){
+                        this.$message({
+                            type: 'success',
+                            message: '接单成功!'
+                        });
+                        gotoNewOrder.$emit('goNewOrder','wokerReceivedOrder',2);
+                        this.$router.push({ path: 'wokerReceivedOrder' });
+                    }else{
+                        this.$message({
+                            type: 'error',
+                            message: res.msg
+                        });     
+                    }
+                }).catch(err=>{
+                    console.log(err);
                 });
-                gotoNewOrder.$emit('goNewOrder','wokerReceivedOrder',2);
-                this.$router.push({ path: 'wokerReceivedOrder' });
             }).catch(() => {
                 this.$message({
                     type: 'info',

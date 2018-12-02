@@ -11,7 +11,7 @@
     <el-table-column type="expand" >
         <template slot-scope="props">
             <el-form label-position="left" 
-            inline class="userTable">
+            inline class="userTable demo-table-expand">
                 <el-form-item label="订单号 :" >
                     <span>{{ props.row.orderId }}</span>
                 </el-form-item>
@@ -42,14 +42,17 @@
                     <span v-for="it in props.row.goodsCode"
                     :key='it'>{{it}}</span>
                 </el-form-item>
-                <el-form-item label="接单人员 :" 
-                v-if='props.row.courierPeople'>
-                    <span>{{ props.row.courierPeople }}</span>
-                </el-form-item>
-                <el-form-item label="接单人电话 :" 
-                v-if='props.row.courierPhone'>
-                    <span>{{ props.row.courierPhone }}</span>
-                </el-form-item>
+                <template v-if="props.row.orderState=='已接单'">
+                    <el-form-item label="接单人员 :" >
+                        <span>{{ props.row.courierPeople }}</span>
+                    </el-form-item>
+                    <el-form-item label="接单人电话 :" >
+                        <span>{{ props.row.courierPhone }}</span>
+                    </el-form-item>
+                    <el-form-item label="接单时间 :">
+                        <span>{{ props.row.receivedDate }}</span>
+                    </el-form-item>
+                </template>
                 <el-form-item  label="备注 :" >
                     <span>{{ props.row.remarks }}</span>
                 </el-form-item>

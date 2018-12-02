@@ -59,10 +59,10 @@ export default {
             return this.$route.path.split('/')[1];
         },
         gotoPage(){
-            if(this.grade==0){
-                return 'person'
-            }else if(this.grade==1){
+            if(this.grade==1){
                 return 'wokerPerson'
+            }else{
+                return 'person'
             }
         },
         userName(){

@@ -16,6 +16,7 @@
 <script>
 import leftMenu from '../leftMenu'
 import appFooter from '../../appFooter'
+import axios from 'axios'
 export default {
     components:{
         leftMenu,
@@ -60,7 +61,30 @@ export default {
                 }
              ]
         }
-    }
+    },
+    methods:{
+        checkLogin(){
+            let loading = this.$loading({lock:true,text:'正在加载...'});
+            axios.get("/users/checkLogin").then((response)=>{
+                    let res = response.data;
+                    loading.close();
+                    if(res.status=="0"){
+
+                    }else{
+                        this.$message({
+                            message: '当前未登录!',
+                            type: 'error'
+                        });
+                        this.$router.push({ path: '/login' });                      
+                    }
+            }).catch(err=>{
+                console.log(err);
+            })
+        }
+    },
+    created() {
+        this.checkLogin();
+    },
 }
 </script>
 

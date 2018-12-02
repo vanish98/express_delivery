@@ -3,7 +3,6 @@
         <person-title>当前位置 :: 我的订单 >> <em>当前订单</em></person-title>
         <div class="currentOrder-cont">
                 <userOrderList 
-                v-loading="loading"
                 :userOrder='noCompOrder'
                 :listType='listType'
                 :titleList='titleList'
@@ -20,7 +19,6 @@ import axios from 'axios'
 export default {
     data(){
         return {
-            loading:true,
             noCompOrder:[],
             listType:{
                 noCompBtn:true
@@ -36,13 +34,14 @@ export default {
         userOrderList
     },
     mounted() {
-        setTimeout(()=>this.loading=false,600);
         this.getUserOrder();
     },
     methods:{
         getUserOrder(){
+            let loading = this.$loading({lock:true,text:'玩命加载中...'});
             axios.get('/users/userCurrentOrder').then(response=>{
                 let res = response.data;
+                loading.close();
                 if(res.status=='0'){
                     this.noCompOrder = res.result;
                 }else{
@@ -61,8 +60,10 @@ export default {
                 cancelButtonText: '取消',
                 type: 'error'
             }).then(() => {
+                let loading = this.$loading({lock:true,text:'正在取消订单...'});
                 axios.get(`/users/cancelCurrentOrder?orderId=${data.orderId}`).then(response=>{
                     let res = response.data;
+                    loading.close();
                     if(res.status=='0'){
                         this.$message({
                             type: 'success',
@@ -85,7 +86,7 @@ export default {
                  });          
             });      
         },
-        handleCompleted(data){
+        handleCompleted(orderData){
             // 完成订单
             this.$confirm(`是否确认送达,完成订单?`, 
                 '支付订单', {
@@ -93,8 +94,10 @@ export default {
                 cancelButtonText: '取消',
                 type: 'success'
             }).then(() => {
-                axios.get(`/users/completedCurrentOrder?orderId=${data.orderId}`).then(response=>{
+                let loading = this.$loading({lock:true,text:'正在完成订单...'});
+                axios.post(`/users/completedCurrentOrder`,orderData).then(response=>{
                     let res = response.data;
+                    loading.close();
                     if(res.status=='0'){
                         this.$message({
                             type: 'success',

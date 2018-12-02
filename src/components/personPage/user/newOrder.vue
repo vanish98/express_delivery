@@ -134,24 +134,36 @@ export default {
     },
     methods: {
         handleNewOrder(objdata){
+            let loading = this.$loading({lock:true,text:'正在发布...'});
             axios.post('/users/newOrder',objdata).then(response=>{
                 let res = response.data;
+                loading.close();
                 if(res.status=='0'){
-                        this.$message({
-                            message: '恭喜你，发布成功!',
-                            type: 'success'
-                        });
+                    this.$message({
+                        message: '恭喜你，发布成功!',
+                        type: 'success'
+                    });
+                    gotoNewOrder.$emit('goNewOrder','currentOrder');
+                    this.$router.push({ path: 'currentOrder' });  
                 }else{
-                    console.log(res.msg);    
+                    this.$message({
+                        message: res.msg,
+                        type: 'error'
+                    });   
                 }
             }).catch(err=>{
                 console.log(err);
-                
             })
         },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
+                    this.$confirm(`确认填写正确, 是否支付${this.orderForm.Price}元并发布订单?`, 
+                        '发布订单', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'success'
+                    }).then(() => {
                         let order = {
                             goodsTpye:this.orderForm.goodsTpye,
                             goodsSize:this.orderForm.goodsSize,
@@ -161,9 +173,21 @@ export default {
                             goodsNumber:this.orderForm.goodsNumber,
                             remarks:this.orderForm.remarks
                         }
-                        this.handleNewOrder(order);
-                        gotoNewOrder.$emit('goNewOrder','currentOrder');
-                        this.$router.push({ path: 'currentOrder' });       
+                        let loading = this.$loading({lock:true,text:'正在支付...'});
+                        setTimeout(()=>{
+                            loading.close();
+                            this.$message({
+                                message: '支付成功!',
+                                type: 'success'
+                            });
+                            this.handleNewOrder(order)
+                        },600);
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '已取消发布'
+                        });          
+                    });   
                 } else {
                     console.log('error submit!!');
                     return false;

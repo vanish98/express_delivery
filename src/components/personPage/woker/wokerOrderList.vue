@@ -8,7 +8,7 @@
     <div class="emptyTip" slot="empty">
         暂时没有订单 , 赶紧去
         <a href="" @click.prevent="handleGotoNewOrde"
-        > 发布订单 </a>吧
+        > 接收订单 </a>吧
     </div>
     <el-table-column type="expand" >
         <template slot-scope="props">
@@ -36,6 +36,9 @@
                     </el-form-item>
                     <el-form-item label="收货地址 :" >
                         <span>{{ props.row.address }}</span>
+                    </el-form-item>
+                    <el-form-item label="接单时间 :" >
+                        <span>{{ props.row.receivedDate }}</span>
                     </el-form-item>
                 </template>
                 <el-form-item label="快递公司 :" >
