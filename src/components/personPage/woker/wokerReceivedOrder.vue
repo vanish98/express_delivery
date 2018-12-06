@@ -22,7 +22,7 @@ export default {
             rightOptBtn:'receiveOrderBtn',// 'receiveOrderBtn'  // 'historyBtn'    
             titleList:[
                 {id:1,columnTitle:'发布时间',prop:'createTime',sortable:true},
-                {id:2,columnTitle:'订单价格(元)',prop:'Price',sortable:true},
+                {id:2,columnTitle:'价格(元)',prop:'Price',sortable:true},
                 {id:3,columnTitle:'类型',prop:'goodsTpye',sortable:false},
                 {id:4,columnTitle:'数量',prop:'goodsNumber',sortable:true}
 

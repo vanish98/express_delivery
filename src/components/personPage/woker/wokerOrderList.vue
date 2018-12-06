@@ -34,9 +34,6 @@
                         <span v-for="it in props.row.goodsCode"
                         :key='it'>{{it}}</span>
                     </el-form-item>
-                    <el-form-item label="收货地址 :" >
-                        <span>{{ props.row.address }}</span>
-                    </el-form-item>
                     <el-form-item label="接单时间 :" >
                         <span>{{ props.row.receivedDate }}</span>
                     </el-form-item>
@@ -64,7 +61,11 @@
                 <el-form-item  label="备注 :" >
                     <span>{{ props.row.remarks }}</span>
                 </el-form-item>
-                
+                <el-form-item label="收货地址 :" 
+                v-if="props.row.orderState!='未接单'"
+                class="address">
+                        <span>{{ props.row.address }}</span>
+                </el-form-item>
             </el-form>
         </template>  
     </el-table-column>
@@ -222,6 +223,9 @@ export default {
         margin-right: 0;
         margin-bottom: 0;
         width: 50%;
+    }
+    .el-form-item.address{
+        width: 100%;
     }
 }
 </style>

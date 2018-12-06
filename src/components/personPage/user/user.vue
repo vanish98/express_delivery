@@ -52,6 +52,14 @@ export default {
                     menuItem:[
                         {route:'myMessage',listTitle:'消息'}
                     ]
+                },
+                {
+                    index:"4",
+                    icon:'el-icon-edit-outline',
+                    title:'加入我们',
+                    menuItem:[
+                        {route:'joinUs',listTitle:'申请'}
+                    ]
                 }
              ]
         }
@@ -67,7 +75,8 @@ export default {
                     }else{
                         this.$message({
                             message: '当前未登录!',
-                            type: 'error'
+                            type: 'error',
+                            showClose:true
                         });
                         this.$router.push({ path: '/login' });                      
                     }

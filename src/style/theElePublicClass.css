@@ -19,3 +19,14 @@
     .el-notification{
         top: 5rem !important;
 }
+/* 表格 */
+.el-table td, .el-table th{
+    padding: 0.6rem 0;
+    text-align: center;
+}
+.el-table td form{
+    text-align: left;
+}
+.el-button{
+    text-align: center;
+}

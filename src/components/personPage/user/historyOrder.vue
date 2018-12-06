@@ -3,9 +3,6 @@
         <person-title>当前位置 :: 我的订单 >> <em>历史订单</em></person-title>
          <div class="hidtoryOrder-cont">
                 <userOrderList 
-                v-loading="loading"
-                element-loading-text="拼命加载中"
-                element-loading-spinner="el-icon-loading"
                 :userOrder='CompOrder'
                 :listType='listType'
                 :titleList='titleList'
@@ -21,7 +18,6 @@ import axios from 'axios'
 export default {
         data(){
         return {
-            loading:true,
             CompOrder:[],
             listType:{
                 noCompBtn:false
@@ -37,13 +33,14 @@ export default {
         userOrderList
     },
     mounted() {
-        setTimeout(()=>this.loading=false,600);
         this.getHistoryOrder();
     },
     methods:{
         getHistoryOrder(){
+            let loading = this.$loading({lock:true,text:'正在加载...'});
             axios.get('/users/historyOrder').then(response=>{
                 let res = response.data;
+                loading.close();
                 if(res.status=='0'){
                     this.CompOrder = res.result;
                 }else{

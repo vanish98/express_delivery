@@ -2,28 +2,17 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 //异步路由
-const loginRegister = resolve => require(['@cts/loginRegister/loginRegister'], resolve),
-      login = resolve => require(['@cts/loginRegister/login'], resolve),
-      register = resolve => require(['@cts/loginRegister/register'], resolve),
-      forgotPassword = resolve => require(['@cts/loginRegister/forgotPassword'], resolve),
-      appHeader = resolve => require(['@cts/appHeader'], resolve),
-      appHome = resolve => require(['@cts/home/home'], resolve),
-      aboutUs = resolve => require(['@cts/aboutUs/aboutUs'], resolve),
-      customerService = resolve => require(['@cts/customerService/customerService'], resolve),
-      suggest = resolve => require(['@cts/suggest/suggest'], resolve),
-      userPage = resolve => require(['@ctsPage/user/user'], resolve),
-      userInformation = resolve => require(['@ctsPage/userInformation'], resolve),
-      addInformation = resolve => require(['@ctsPage/user/addInformation'], resolve),
-      currentOrder = resolve => require(['@ctsPage/user/currentOrder'], resolve),
-      newOrder = resolve => require(['@ctsPage/user/newOrder'], resolve),
-      historyOrder = resolve => require(['@ctsPage/user/historyOrder'], resolve),
-      myMessage = resolve => require(['@ctsPage/myMessage'], resolve),
-      wokerPage = resolve => require(['@ctsPage/woker/woker'], resolve),
-      wokerAccount = resolve => require(['@ctsPage/woker/wokerAccount'], resolve),
-      wokerReceivedOrder = resolve => require(['@ctsPage/woker/wokerReceivedOrder'], resolve),
-      wokerHistoryOrder = resolve => require(['@ctsPage/woker/wokerHistoryOrder'], resolve),
-      allUserOrderList = resolve => require(['@ctsPage/woker/allUserOrderList'], resolve)
+import {loginRegister ,login ,register ,forgotPassword ,
+  appHeader ,appHome ,aboutUs ,customerService ,suggest } from './publicRouter'
 
+import {userPage ,userInformation ,addInformation ,
+  currentOrder ,joinUs ,newOrder ,historyOrder ,myMessage } from './userRouter'
+
+import {wokerPage ,wokerAccount ,wokerReceivedOrder ,
+  wokerHistoryOrder ,allUserOrderList } from './wokerRouter'
+
+import {adminLogin ,adminPage ,findPeople ,allUser ,allWoker ,findOneOrder ,allNotReceiveOrder ,
+  allReceivedOrder ,allHistoryOrder ,sendMessage ,joinUsApply ,suggestList} from './adminRouter'
 
 
 // //同步路由
@@ -129,6 +118,10 @@ export default new Router({
         {
           path:'myMessage',
           component:myMessage
+        }, 
+        {
+          path:'joinUs',
+          component:joinUs
         }
       ] 
     },
@@ -168,6 +161,60 @@ export default new Router({
           component:myMessage
         }
       ] 
+    },
+    {
+      path: '/adminLogin',
+      component:adminLogin  
+    },
+    {
+      path: '/admin',
+      component:adminPage,
+      children:[
+        {
+          path:'/',
+          redirect:'allUser'  
+        },
+        {
+          path:'allUser',
+          component:allUser  
+        },
+        {
+          path:'allWoker',
+          component:allWoker   
+        },
+        {
+          path:'findPeople',
+          component:findPeople  
+        },
+        {
+          path:'findOneOrder',
+          component:findOneOrder  
+        },
+        {
+          path:'allNotReceiveOrder',
+          component:allNotReceiveOrder  
+        },
+        {
+          path:'allReceivedOrder',
+          component:allReceivedOrder  
+        },
+        {
+          path:'allHistoryOrder',
+          component:allHistoryOrder  
+        },
+        {
+          path:'sendMessage',
+          component:sendMessage  
+        },
+        {
+          path:'joinUsApply',
+          component:joinUsApply  
+        },
+        {
+          path:'suggestList',
+          component:suggestList  
+        }
+      ]
     },
     {
       path: '/aboutUs',

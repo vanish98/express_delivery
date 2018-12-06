@@ -158,7 +158,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.$confirm(`确认填写正确, 是否支付${this.orderForm.Price}元并发布订单?`, 
+                    this.$confirm(`确认填写正确, 是否支付 ${this.orderForm.Price} 元并发布订单?`, 
                         '发布订单', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',

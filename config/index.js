@@ -16,6 +16,9 @@ module.exports = {
       },
       '/users/*':{
         target:'http://localhost:3000'
+      },
+      '/admin/*':{
+        target:'http://localhost:3000'
       }
     },
 

@@ -73,14 +73,12 @@ export default {
         },
         scrollToTop(){       
            this.$refs['scroll'].scrollTo({ x: 0, y: 0});
+           this.percentage = 0;
         },
         showComponent(target){
             this.shwoCompts=target;
         }   
-    },
-    mounted() {
-      
-    }, 
+    }
 }
 </script>
 

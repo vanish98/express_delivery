@@ -8,21 +8,23 @@
             <div class="sug-cont-body" v-if="sugcontshow"> 
                     <ul class="sug-list">
                         <li>
-                            <label>姓名 : <input type="text"></label>
+                            <label>姓名 : <input type="text"
+                            v-model.trim="sugcontForm.userName"></label>
                         </li>
                         <li>
-                            <label>电话 : <input type="text"></label>
+                            <label>电话 : <input type="text"
+                             v-model.trim="sugcontForm.phoneNum"></label>
                         </li>   
                     </ul>
                 <div class="textarea">
                     <span>内容 : </span>
                     <textarea name="suggestText" 
                         id="suggestText" 
-                        @blur="$emit('blur',$event.target.value)">
-                        </textarea>
+                        v-model.trim="sugcontForm.suggestText"></textarea>
                 </div>
                 <div class="submit">
-                    <input type="button" value="提交">
+                    <input type="button" 
+                    @click="$emit('handleSubSuggest',sugcontForm)" value="提交">
                 </div>
             </div>        
         </transition>    
@@ -35,6 +37,15 @@ export default {
     props:{
         sugcontshow:Boolean,
         contShow:Boolean
+    },
+    data(){
+        return{
+            sugcontForm:{
+                userName:'',
+                phoneNum:'',
+                suggestText:''
+            }
+        }
     }
 }
 </script>
@@ -46,12 +57,12 @@ $text-color:#777;
     display: flex;
     flex-direction: column;
     width: 60%;
-    margin: -1rem auto 10rem;
+    margin: -5rem auto 10rem;
     border:0.4rem solid #4facfe;
     box-sizing: border-box;
     box-shadow: 1rem 1rem 1rem #888;
     transition:.6s;
-    height: 26.5rem;
+    height: 24.5rem;
     background-color: #fff;
 }
 .hiden-h{
@@ -59,7 +70,7 @@ $text-color:#777;
     margin-bottom: 34rem;
 }
 .sug-cont-body{
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
 }
 .sug-list{
     width: 100%;
@@ -114,7 +125,7 @@ $text-color:#777;
     padding-top: 0.5rem;
     font-size: 0.8rem;
     letter-spacing: 1px;
-    color: #666;
+    color: #444;
 }
 .submit{
     width: 100%;

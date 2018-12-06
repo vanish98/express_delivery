@@ -22,7 +22,7 @@ export default {
             rightOptBtn:'historyBtn',// 'receiveOrderBtn'  // 'historyBtn'    
             titleList:[
                 {id:1,columnTitle:'完成时间',prop:'completedData',sortable:true},
-                {id:2,columnTitle:'订单价格(元)',prop:'Price',sortable:true},
+                {id:2,columnTitle:'价格(元)',prop:'Price',sortable:true},
                 {id:3,columnTitle:'类型',prop:'goodsTpye',sortable:false},
                 {id:4,columnTitle:'数量',prop:'goodsNumber',sortable:true}
 
@@ -60,7 +60,7 @@ export default {
                 type: 'error'
             }).then(() => {
                 let loading = this.$loading({lock:true,text:'玩命加载中...'});
-                axios.post(`/wokers/deleteOrder`,{orderId:orderData.orderId}).then(response=>{
+                axios.post(`/wokers/deleteHistoryOrder`,{orderId:orderData.orderId}).then(response=>{
                     let res = response.data;
                     loading.close();
                     if(res.status=='0'){
@@ -76,6 +76,7 @@ export default {
                         });   
                     }
                 }).catch(err=>{
+                    loading.close();
                     console.log(err);
                     
                 });

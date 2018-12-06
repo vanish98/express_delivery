@@ -32,17 +32,19 @@ export default {
     data(){
         return{
             activeName: '',
-            lastClick:[],
-            userMessage:[] 
+            userMessage:[],
+            loading:null 
         }
     },
     mounted() {
         this.getMessage();
+        this.loading = this.$loading({lock:true,text:'正在加载...'});
     },
     methods:{
         getMessage(){
             axios.get('/users/userMessage').then(response=>{
                 let res = response.data;
+                this.loading.close();
                 if(res.status=='0'){
                     this.userMessage = res.result;
                 }else{
@@ -56,9 +58,8 @@ export default {
             })
         },
         handleReadMsg(data){   
-            let flag = this.lastClick.every(it=>it!=data);
-            if(data !='' && flag){
-                this.lastClick.push(data); //记录已点击后的 
+            let flag = this.userMessage.filter(it=>!it.isRead && it.title==data);
+            if(data !='' && flag.length){
                 axios.get(`/users/readMessage?title=${data}`).then(response=>{
                 let res = response.data;
                     if(res.status=='0'){

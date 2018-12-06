@@ -1,19 +1,12 @@
 <template>
-<div class="personLeftMenu">
-    <el-radio-group v-model="isCollapse">
-            <el-radio-button v-if="isCollapse" :label="false">展开</el-radio-button>
-            <el-radio-button v-else :label="true">收起</el-radio-button>
-    </el-radio-group>
+<div class="adminLeftMenu">
     <el-menu 
     :default-active="defaultActive" 
     class="el-menu-vertical-demo"
-    @open="handleOpen" 
-    @close="handleClose" 
-    @select="handleSelect"
+    active-text-color='#409EFF'
     :router='true'
     ref="leftMenu"
-    unique-opened
-    :collapse="isCollapse">
+    unique-opened>
         <el-submenu 
         v-for="item in menuData"
         :key='item.index'
@@ -41,51 +34,54 @@ import {gotoNewOrder} from './../../assets/js/gotoNewOrder'
     },
     data() {
       return {
-        isCollapse: false,//默认展开
         menuData:this.leftMenuData,
-        defaultActive:'userInformation'
+        defaultActive:'allUser'
       };
     },
     methods: {
-      handleOpen(key, keyPath) {
-    //    console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath){
-        //  console.log(key,keyPath);
-         // this.isCollapse =true;
-      }
+    //   handleOpen(key, keyPath) {
+    //   },
+    //   handleClose(key, keyPath) {
+    //   },
+    //   handleSelect(key, keyPath){
+    //   }
     },
     mounted() {
         //console.log(this.$route.path.split('/')[2]);
         let RefreshMenu = this.$route.path.split('/')[2];
-        this.$refs.leftMenu.activeIndex = RefreshMenu;
-        this.defaultActive = RefreshMenu;  
-        gotoNewOrder.$on('goNewOrder',(index,num)=>{
-            try {
-                this.$refs.leftMenu.activeIndex = index;
-            } catch (error) { }
-
-            if(num && !this.isCollapse){
-                this.$refs.leftMenu.open(num);
-            }
-            //console.log( this.$refs.leftMenu.activeIndex);
-        });
+        try{
+            this.$refs.leftMenu.activeIndex = RefreshMenu;
+            this.defaultActive = RefreshMenu;  
+        }catch(err){ }
     }
   }
 </script>
 
 <style lang='scss'>
-.personLeftMenu{
+.adminLeftMenu{
     position: relative;
     text-align: right;
     height: 100%;
+    background-color: #00f2fe;
     .el-menu-vertical-demo,
     .el-radio-button__inner,
     .el-menu{
         background-color: #f7f7f7;
+        background-image: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+    }
+    .el-submenu__title i{
+        color: #fff;
+    }
+    .el-submenu__title,
+    .el-menu-item {
+        color: #fff;
+        &:focus,
+        &:hover{
+            background-color: rgba(255,255,255,.5);
+        } 
+    }
+    .el-submenu__title:hover{
+         color: #666;
     }
     /* 展开或者收起按钮 */
     .el-radio-group{

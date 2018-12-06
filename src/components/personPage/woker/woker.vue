@@ -73,7 +73,8 @@ export default {
                     }else{
                         this.$message({
                             message: '当前未登录!',
-                            type: 'error'
+                            type: 'error',
+                            showClose:true
                         });
                         this.$router.push({ path: '/login' });                      
                     }

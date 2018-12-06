@@ -78,10 +78,36 @@ export default {
     },
     mounted(){
         this.checkLogin();
+        this.getMessage();
     },
     methods:{
         handleUserLogin(){
             this.$router.push({path:'/login'});
+        },
+        getMessage(){
+            axios.get('/users/userMessage').then(response=>{
+                let res = response.data;
+                if(res.status=='0'){
+                    let msg = res.result.filter(it=>!it.isRead);
+                    if(msg.length){
+                        this.showMessage=true;
+                        this.$notify({
+                            title: '消息提醒',
+                            message: `您有新的未读消息,详情请在 个人中心 >> 我的消息-查看`,
+                            duration:6000,
+                            showClose:true,
+                            type: 'success'
+                        }); 
+                    }else{
+                        this.showMessage=false;
+                    } 
+                }else{
+                    console.log();
+                    
+                }
+            }).catch(err=>{
+                console.log(res.msg);
+            })
         },
         checkLogin(){
             axios.get("/users/checkLogin").then((response)=>{
