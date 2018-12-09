@@ -20,67 +20,74 @@ export default {
             questionData:[
                 {
                     id:1,topImg:'./static/img/customer-service-question1.png', 
-                    h5Title:'催单问题',
+                    h5Title:'时间问题',
                     list:[
                         {
-                            quest:'订单超时了怎么办?',
-                            result:'投诉1'
+                            quest:'快递长时间未送达?',
+                            result:`订单显示已接单, 但是快递长时间未送达 ,
+                                    您可以查看订单详细信息, 尝试联系送单员 ,
+                                    如果遇到无法解决的问题, 可以联系客服.`
                         },
                         {
-                            quest:'订单一直没有骑手接单怎么办?',
-                            result:'投诉2'
+                            quest:'订单一直没有人接单?',
+                            result:`可能您的订单中显示您的快递太大 ,但是报酬
+                                    较少 ,您可以尝试更改订单信息 ,或者重新发布.`
                         },
                         {
-                            quest:'如何催单1?',
-                            result:'投诉3'
+                            quest:'超过两天未送达?',
+                            result:`如果已接单,但是超过两天未收到快递,
+                                    但是订单显示已经签收,这时请联系客服处理.`
                         },
                         {
-                            quest:'如何催单2？',
-                            result:'投诉4'
+                            quest:'订单异常？',
+                            result:'如果您对订单有任何疑问 ,您都可以联系客服处理.'
                         }
                     ]
                 },
                 {
                     id:2,topImg:'./static/img/customer-service-question2.png',
-                    h5Title:'退单问题',
+                    h5Title:'快递问题',
                     list:[
                         {
-                            quest:'订单超时了怎么办?11',
-                            result:'投诉11'
+                            quest:'快递损坏或丢失?',
+                            result:'如果您快递送到手已经损坏 ,请联系客服协商处理'
                         },
                         {
-                            quest:'订单一直没有骑手接单怎么办?11',
-                            result:'投诉22'
+                            quest:'订单一直没有人接单?',
+                            result:`可能您的订单中显示您的快递太大 ,但是报酬
+                                    较少 ,您可以尝试更改订单信息 ,或者重新发布.`
                         },
                         {
-                            quest:'如何催单1?',
-                            result:'投诉33'
+                            quest:'订单已发布但信息错误?',
+                            result:`在没有接单的情况您可以自己选择取消订单 ,
+                                    如果已经接单您可以联系送单员协助商量处理 ,
+                                    或者联系客服.`
                         },
                         {
-                            quest:'如何催单2？',
-                            result:'投诉44'
+                            quest:'订单异常？',
+                            result:'如果您对订单有任何疑问 ,您都可以联系客服处理.'
                         }
                     ]
                 },
                 {
                     id:3,topImg:'./static/img/customer-service-question3.png',
-                    h5Title:'活动问题',
+                    h5Title:'其他问题',
                     list:[
                         {
-                            quest:'订单超时了怎么办?22',
-                            result:'投诉66'
+                            quest:'如何成为工作人员',
+                            result:'在个人中心>>加入我们 可以申请加入'
                         },
                         {
-                            quest:'订单一直没有骑手接单怎么办?22',
-                            result:'投诉77'
+                            quest:'订单异常？',
+                            result:'如果您对订单有任何疑问 ,您都可以联系客服处理.'
                         },
                         {
-                            quest:'如何催单1?',
-                            result:'投诉88'
+                            quest:'订单时间异常？',
+                            result:'如果您对订单有任何疑问 ,您都可以联系客服处理.'
                         },
                         {
-                            quest:'如何催单2？',
-                            result:'投诉99'
+                            quest:'订单信息异常？',
+                            result:'如果您对订单有任何疑问 ,您都可以联系客服处理.'
                         }
                     ]
                 }

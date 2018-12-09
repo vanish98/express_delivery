@@ -73,7 +73,7 @@ a::selection{
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    border-top: 1px solid #ccc;
+    border-top: 0.05rem solid #ccc;
     padding-top: 2rem;
     padding-bottom: 5rem;
     cursor: pointer;
@@ -84,7 +84,7 @@ a::selection{
     margin-right: 2.5rem;
     ul{
         padding:0 2.5rem;
-        border-right: 1px solid #ccc;
+        border-right: 0.05rem solid #ccc;
         h5{
             letter-spacing: 0.1rem;
             font-size: 0.8rem;
@@ -97,7 +97,8 @@ a::selection{
         }
         a{
             color: #666;
-            letter-spacing: 1px;
+            letter-spacing: 0.05rem;
+            font-size: 0.7rem;
             &:hover{
                 color: #333;
             }
@@ -118,7 +119,7 @@ a::selection{
     margin-bottom: 1rem;
     color: #333;
     text-align: left;
-    letter-spacing: 1px;
+    letter-spacing: 0.05rem;
 }
 
 @media only screen and (max-width:640px){

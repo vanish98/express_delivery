@@ -12,7 +12,7 @@ import {wokerPage ,wokerAccount ,wokerReceivedOrder ,
   wokerHistoryOrder ,allUserOrderList } from './wokerRouter'
 
 import {adminLogin ,adminPage ,findPeople ,allUser ,allWoker ,findOneOrder ,allNotReceiveOrder ,
-  allReceivedOrder ,allHistoryOrder ,sendMessage ,joinUsApply ,suggestList} from './adminRouter'
+  allReceivedOrder ,allHistoryOrder ,sendMessage ,joinUsApply ,joinUsHistoryApply ,suggestList} from './adminRouter'
 
 
 // //同步路由
@@ -209,6 +209,10 @@ export default new Router({
         {
           path:'joinUsApply',
           component:joinUsApply  
+        },
+        {
+          path:'joinUsHistoryApply',
+          component:joinUsHistoryApply  
         },
         {
           path:'suggestList',

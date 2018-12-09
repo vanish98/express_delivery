@@ -5,7 +5,7 @@
         </div>
         <div class="form-cont">
             <el-form :model="forgotForm" :rules="forgotFormRules" 
-            ref="forgotForm" label-width="5rem"
+            ref="forgotForm" label-width="7rem"
             @submit.native.prevent
             class="user-forgotForm">
                 <el-form-item  label="账号" prop="userId">
@@ -30,11 +30,11 @@
                     <el-radio :label="1">工作人员</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm('forgotForm')">找回</el-button>
-                    <el-button @click="resetForm('forgotForm')">重置</el-button>
-                </el-form-item>
             </el-form> 
+        </div>
+        <div class="right-cont-btn">
+            <el-button type="primary" @click="submitForm('forgotForm')">找回</el-button>
+            <el-button @click="resetForm('forgotForm')">重置</el-button>
         </div>
         <div class="footer">
             <router-link class="link footer-left" to="/login">登录</router-link>
@@ -71,6 +71,14 @@ export default {
                 questionAnswer:[
                     { required: true, message: '请选择密保答案', trigger: 'blur' }
                 ]
+            }
+        }
+    },
+    mounted() {
+         window.onkeydown = (e)=>{
+            let key = window.event.keyCode;
+            if(key==13){
+                this.submitForm('forgotForm');
             }
         }
     },
@@ -149,6 +157,5 @@ export default {
         }
     }
 }
-
 </style>
 

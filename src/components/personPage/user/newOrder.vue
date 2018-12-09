@@ -43,7 +43,7 @@
                     filterable
                     allow-create
                     default-first-option
-                    no-data-text='添加方法: 回车或者选择下方'
+                    no-data-text='添加方法: 回车或者选择文本'
                     placeholder="请输入取货码">
                     </el-select>
                 </el-form-item> 
@@ -85,6 +85,10 @@ export default {
         };
         let trueGoodsCode=(rule, value, callback) => {
             if (value) {
+                if(value.length!=this.orderForm.company.length){
+                    callback(new Error('取货码和快递公司数量不匹配 !'));
+                    return;
+                }
                 for(let i=0;i<value.length;i++){
                    if(! /^[0-9]{6}$/.test(value[i]) ){
                         callback(new Error('取货码为6位数字 !'));
@@ -120,7 +124,7 @@ export default {
                 ],
                 goodsCode:[
                     { required: true,message: '请输入快递取货码', trigger: 'change' },
-                    { validator: trueGoodsCode,message: '取货码为6位数字 !', trigger: 'change'} 
+                    { validator: trueGoodsCode, trigger: 'change'} 
                 ],
                 Price: [
                     { required: true, type:'number', message: '请设置发布价格', trigger: 'blur' }
@@ -132,7 +136,35 @@ export default {
             }
       }
     },
+    created() {
+        this.handleIsCompInfo();
+    },
     methods: {
+        //如果没有完善个人信息不可以发布订单
+        handleIsCompInfo(){
+            let loading = this.$loading({lock:true,text:'玩命加载中...'});
+            axios.get(`/users/userInformation`).then(response=>{
+                let res = response.data;
+                loading.close();
+                if(res.status=='0'){
+                    let userInfo = res.result;
+                    if(!userInfo.userName || !userInfo.address){
+                        this.$message({
+                            message: '请先完善个人信息,便于联系您',
+                            type: 'error',
+                            showClose:true
+                        });  
+                        gotoNewOrder.$emit('goNewOrder','addInformation',1);
+                        this.$router.push({ path: 'addInformation' });  
+                    }
+                }else{
+                    console.log(res.msg);    
+                }
+            }).catch(err=>{
+                console.log(err);
+                
+            })
+        },
         handleNewOrder(objdata){
             let loading = this.$loading({lock:true,text:'正在发布...'});
             axios.post('/users/newOrder',objdata).then(response=>{
@@ -208,8 +240,9 @@ export default {
     width: 40%;
     min-width: 20rem;
 }
-// 取货码
-// .goodsCode.el-input{
-//     width: auto;
-// }
+@media only screen and (max-width:768px){
+    .createNewOrder{
+        width: 75%;
+    }
+}
 </style>

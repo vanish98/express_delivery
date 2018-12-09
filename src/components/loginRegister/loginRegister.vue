@@ -47,10 +47,11 @@ export default {
 }
 .user-login-cont{
     display: flex;  
+    align-items: center;
+    justify-content: center;
     width: 60%;
-    height: 60%;
     min-width: 40rem;
-    min-height: 25rem;
+    height: 26rem;
 }
 .left-log-cont{
     position: relative;
@@ -58,7 +59,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 60%;
+    width: 55%;
     height: 100%;
     background-color: rgba(165, 167, 172, 0.2);
     .log-body{
@@ -85,15 +86,21 @@ export default {
 .the-right-cont{
     position: relative;
     overflow: hidden;
-    width: 40%;
+    width: 45%;
     min-width: 17rem;
     height: 100%;
     background-color: #fff;   
+    .right-cont-btn{
+        margin-top: 2rem;
+        .el-button{
+            margin: 0 1rem;
+        }
+    }
     .goto-homePage{
         position: absolute;
         display: block;
-        width: 2rem;
-        height: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
         background-image: url('../../assets/img/loginPage.png');
         background-repeat: no-repeat;
         background-size:1.6rem 1.6rem;
@@ -106,7 +113,7 @@ export default {
         display: flex;
         justify-content:space-between;
         width: 100%;
-        bottom: 0.5rem;
+        bottom: 0.8rem;
         .link{
             display: block;
             height: 1rem;
@@ -118,11 +125,36 @@ export default {
             }
         }
         .footer-left{
-            margin-left: 1rem;
+            margin-left: 1.5rem;
         }
         .footer-right{
-            margin-right: 1rem;
+            margin-right: 1.5rem;
         }
+    }
+}
+@media only screen and (max-width:992px){
+    .user-login-cont{
+        width: 70%;
+    }
+    .left-log-cont{
+        width: 50%;
+    }
+    .the-right-cont{
+        width: 50%;
+    }
+}
+@media only screen and (max-width:768px){
+    .user-login-cont{
+        width: 100%;
+        height: 100%;
+    }
+    .left-log-cont{
+        display: none;
+    }
+    .the-right-cont{
+        width: 80%;
+        height: 70%;
+        min-height: 40rem;
     }
 }
 </style>

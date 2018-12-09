@@ -7,7 +7,7 @@
             label-position='left'
             @submit.native.prevent
             :status-icon='true'
-            label-width="5rem" class="demo-ruleForm">
+            label-width="7rem" class="demo-ruleForm">
                 <el-form-item label="姓名 : " prop="userName">
                     <el-input 
                     placeholder="为了安全,不可二次修改!"
@@ -27,7 +27,7 @@
                     placeholder="输入您的联系地址便于配送"
                      v-model="ruleForm.address"></el-input>
                 </el-form-item> 
-                <el-form-item>
+                <el-form-item class="completed-info-btn">
                     <el-button type="primary"
                      @click="submitForm('ruleForm')">修改</el-button>
                     <el-button  @click="resetForm('ruleForm')">重置</el-button>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import {gotoNewOrder} from './../../../assets/js/gotoNewOrder'
 import axios from 'axios'
 export default {
     data() {
@@ -101,7 +102,8 @@ export default {
                             duration:2000,
                             type: 'success'
                         });
-                        this.$router.push({path:'person/userInformation'});
+                        gotoNewOrder.$emit('goNewOrder','userInformation');
+                        this.$router.push({path:'userInformation'});
                     }else{
                         this.$notify({
                             title: '修改失败',
@@ -132,5 +134,16 @@ export default {
     padding-top: 2rem;
     width: 40%;
     min-width: 20rem;
+    .el-form-item{
+        margin-bottom: 1.5rem;
+    }
+}
+.completed-info-btn{
+    margin: 2rem;
+}
+@media only screen and (max-width:768px){
+    .add-infor-cont{
+        width: 70%;
+    }
 }
 </style>

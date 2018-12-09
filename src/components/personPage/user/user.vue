@@ -1,10 +1,14 @@
 <template>
     <div class="person-user">
         <div class="person-user-body">
-            <leftMenu
-            :leftMenuData='leftMenuData'>
-            </leftMenu>
-            <div class="pserson-router-cont">
+            <div class="user-left-menu">
+                <leftMenu
+                :leftMenuData='leftMenuData'
+                @isCollapse='handleIsCollapse'>
+                </leftMenu>
+            </div>
+            <div class="pserson-router-cont" 
+            :class="{'isCollapse-w':isCollapse}">
                 <transition name='opa-mini'>
                     <router-view></router-view>
                 </transition> 
@@ -37,7 +41,7 @@ export default {
                 },
                 {
                     index:"2",
-                    icon:'el-icon-menu',
+                    icon:'el-icon-tickets',
                     title:'我的订单',
                     menuItem:[
                         {route:'currentOrder',listTitle:'当前订单'},
@@ -61,7 +65,8 @@ export default {
                         {route:'joinUs',listTitle:'申请'}
                     ]
                 }
-             ]
+             ],
+             isCollapse:false
         }
     },
     methods:{
@@ -83,6 +88,9 @@ export default {
             }).catch(err=>{
                 console.log(err);
             })
+        },
+        handleIsCollapse(newVal){
+            this.isCollapse = newVal;
         }
     },
     created() {
@@ -104,15 +112,30 @@ export default {
     width: 80%;
     margin: 0 auto 5rem; 
 }
+.user-left-menu{
+    background-color: #fff;
+}
 .pserson-router-cont{
     width: 100%;
-    min-height: 680px;
+    width:  calc(100% - 10.1rem);
+    min-height: 35rem;
     background-color: #fff;
     border: 1px solid rgb(228, 225, 225);
+    border-top: none;
+    transition: all .5s;
+    background-color: darken(#f4f9fd, 0%) ;
+}
+.isCollapse-w{
+    width:  calc(100% - 3.3rem);
 }
 @media only screen and (max-width:1200px){
     .person-user-body{
         width: 90%;
+    }
+}
+@media only screen and (max-width:992px){
+    .person-user-body{
+        width: 100%;
     }
 }
 </style>

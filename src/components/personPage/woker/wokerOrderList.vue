@@ -182,6 +182,15 @@ export default {
     .el-message{
         top: 5rem;
     }
+    .el-button{
+        width: 4.2rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        padding: 0;
+        span{
+            font-size: 0.6rem;
+        }
+    }
     //交易操作
     .btn-cancel{
         margin-right: 0.2rem;
@@ -216,7 +225,7 @@ export default {
         font-size: 0;
     }
     .demo-table-expand label {
-        width: 90px;
+        width: 4.5rem;
         color: #99a9bf;
     }
     .demo-table-expand .el-form-item {

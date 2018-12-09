@@ -1,6 +1,7 @@
 <template>
     <el-table
     :data="theUserOrder"
+    class="userOrderList"
     :default-sort = "{prop: 'createTime', order: 'descending'}"
     style="width: 100%">
     <div class="emptyTip" slot="empty">
@@ -146,8 +147,18 @@ export default {
 </script>
 
 <style lang='scss'>
+.userOrderList{
     .el-message{
         top: 5rem;
+    }
+    .el-button{
+        width: 4.2rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        padding: 0;
+        span{
+            font-size: 0.6rem;
+        }
     }
     //交易操作
     .btn-cancel{
@@ -180,7 +191,7 @@ export default {
         font-size: 0;
     }
     .demo-table-expand label {
-        width: 90px;
+        width: 6.2rem;
         color: #99a9bf;
     }
     .demo-table-expand .el-form-item {
@@ -188,4 +199,5 @@ export default {
         margin-bottom: 0;
         width: 50%;
     }
+}
 </style>

@@ -85,7 +85,12 @@ export default {
                         showClose:true
                     });
                 }else{
-                    console.log(res.msg);    
+                    this.$message({
+                        message:res.msg,
+                        type: 'error',
+                        duration:2000,
+                        showClose:true
+                    });  
                 }
             }).catch(err=>{
                 console.log(err);
@@ -108,7 +113,7 @@ export default {
     }
 }
 .joinUs-title .title{
-    color: #666;
+    color: #777;
     margin-bottom: 2rem;
 }
 

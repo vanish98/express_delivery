@@ -8,8 +8,9 @@ const adminLogin =  resolve => require(['@ctsAdmin/admin_login'], resolve),
     allReceivedOrder =  resolve => require(['@ctsAdmin/allOrder/allReceivedOrder'], resolve),
     allHistoryOrder =  resolve => require(['@ctsAdmin/allOrder/allHistoryOrder'], resolve),
     sendMessage =  resolve => require(['@ctsAdmin/message/sendMessage'], resolve),
-    joinUsApply =  resolve => require(['@ctsAdmin/joinUsApply'], resolve),
+    joinUsApply =  resolve => require(['@ctsAdmin/joinUS/joinUsApply'], resolve),
+    joinUsHistoryApply =  resolve => require(['@ctsAdmin/joinUS/joinUsHistoryApply'], resolve),
     suggestList =  resolve => require(['@ctsAdmin/suggestList'], resolve);
 
 export {adminLogin ,adminPage ,findPeople ,allUser ,allWoker ,findOneOrder ,allNotReceiveOrder ,
-        allReceivedOrder ,allHistoryOrder ,sendMessage ,joinUsApply ,suggestList}
+        allReceivedOrder ,allHistoryOrder ,sendMessage ,joinUsApply ,joinUsHistoryApply ,suggestList}

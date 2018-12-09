@@ -7,7 +7,6 @@ import store  from './store/index'
 Vue.config.productionTip = false
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import 'element-ui/lib/theme-chalk/display.css';
 import './style/theElePublicClass.css'
 Vue.use(ElementUI);
 
@@ -17,6 +16,14 @@ import scrollConfig from '../config/vuescroll'
 Vue.use(vuescroll,{
   ops:scrollConfig
 });
+
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: './assets/error.png',
+  loading: './assets/loading.gif',
+  attempt: 1
+})
 
 import person_title from './components/personPage/personContTitle'
 Vue.component('person-title', person_title);

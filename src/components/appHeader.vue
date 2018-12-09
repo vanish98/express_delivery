@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo hidden-sm-and-down">
+        <div class="logo ">
             <a href="javascript:void(0);">
                 <img src="../assets/img/logo.png" alt="logo图标">
                 <h1>校园闪电侠</h1>
@@ -12,7 +12,7 @@
             <router-link :class="{'link-active':currentPage==gotoPage}" 
             :to="'/'+gotoPage">
                 <el-badge is-dot 
-                :hidden='!showMessage'
+                :hidden='!msgLen'
                 class="item">个人中心</el-badge>
             </router-link>
             <!-- 加入我们写在关于我们中 -->
@@ -45,15 +45,15 @@ import { mapState } from 'vuex'
 export default {
     data(){
         return{
-            loginState:false,
-            showMessage:false
+            loginState:false
         }
     },
     computed: {
         ...mapState({
             userId:state=>state.user.userInfo.userId,
             grade:state=>state.user.userInfo.grade,
-            vuexUserName:state=>state.user.userInfo.userName
+            vuexUserName:state=>state.user.userInfo.userName,
+            msgLen:state=>state.user.userInfo.msgLen
         }),
         currentPage(){         
             return this.$route.path.split('/')[1];
@@ -89,8 +89,8 @@ export default {
                 let res = response.data;
                 if(res.status=='0'){
                     let msg = res.result.filter(it=>!it.isRead);
+                    this.$store.commit("saveUserInfo",{msgLen:msg.length});
                     if(msg.length){
-                        this.showMessage=true;
                         this.$notify({
                             title: '消息提醒',
                             message: `您有新的未读消息,详情请在 个人中心 >> 我的消息-查看`,
@@ -98,12 +98,9 @@ export default {
                             showClose:true,
                             type: 'success'
                         }); 
-                    }else{
-                        this.showMessage=false;
-                    } 
+                    }
                 }else{
-                    console.log();
-                    
+                // console.log(res.msg);
                 }
             }).catch(err=>{
                 console.log(res.msg);
@@ -124,13 +121,13 @@ export default {
             })
         },
         logout(){
+             this.handleUserLogin();
              axios.post("/users/logout").then((response)=>{
                     let res = response.data;
                     if(res.status=="0"){
                         this.loginState=false;
                         this.$store.commit("saveUserInfo",{userId:'',userName:''});
                         console.log('退出成功');   
-                        this.handleUserLogin();    
                     }else{
                       console.log(res.msg);                      
                     }
@@ -145,11 +142,13 @@ export default {
 
 <style scoped lang='scss'>
 @import "../style/mixin";
+$color:#34495e;
 a{
-    color: #fff;
+    color: $color;
 }
 .link-active{
-    background-color: #006bc7;
+    background-color: #eff3f5;
+    color: #3498db;
 }
 $header-height:3rem;
 .header{
@@ -158,9 +157,11 @@ $header-height:3rem;
     justify-content:flex-end;
     align-items: center;
     width: 100%;
-    background-color: #409EFF;
-    color: #fff;
-    @include transition(.3s);
+    background-color: #fff;
+    border-bottom: 0.05rem solid rgb(243, 240, 240);
+    color: $color;
+    // @include transition(.3s);
+    cursor: pointer;
     z-index: 9999;
 }
 .logo{
@@ -172,12 +173,12 @@ $header-height:3rem;
         width: 100%;
         img{
             display: block;
-            max-width: 3rem;
+            max-width: 2.5rem;
             height: auto;
             margin-right: 0.5rem;
          }
          h1{
-             color: #fff;
+             color: $color;
              font-size: 1rem;
              letter-spacing: 2px;
          }
@@ -196,40 +197,30 @@ $header-height:3rem;
         width: 5rem;
         height:$header-height;    
         font-size: 0.8rem; 
-        @include transition(.3s);   
+        @include transition(.4s);   
         &:hover{
-            background-color: #0c77d1;
+            background-color: #eff3f5;
         }
     }
 }
 .usercont{
     display: flex;
     align-items: center;
+    margin-left: 0.5rem;
     img{
         display: block;
         max-width: 1.5rem;
         margin-right: 5px;
         height: auto;
     }
-}
-.message{
-    margin-left: .5rem;
-    a{
-        display: block;
-        width: 2rem;
-        line-height: $header-height;
-        em{
-            width: 0.5rem;
-            height: 0.5rem;
-            font-size: 14px;
-            @include border-radius(5px);
-            background-color: red;
-            color: #fff;
-        }
+    .username em{
+        color: #777;
+        font-family: '微软雅黑';
     }
 }
+
 .login-and-exit{    
-    margin:0 1rem 0 .5rem;
+    margin:0 2rem 0 .5rem;
     a{
         @include set-inline-block;
         line-height: $header-height;
@@ -238,6 +229,20 @@ $header-height:3rem;
         &:hover{
             color: #F56C6C;
         }
+    }
+}
+@media only screen and (max-width:992px){
+    .login-and-exit a{
+        line-height: 4rem;
+    }
+    .header-menu a{
+        height: 4rem;
+        width: 5rem;
+    }
+}
+@media only screen and (max-width:768px){
+    .header .logo{
+        display: none;
     }
 }
 </style>

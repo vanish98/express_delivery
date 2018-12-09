@@ -5,7 +5,7 @@
         </div>
         <div class="form-cont">
             <el-form :model="registerForm" :rules="registerRules" 
-            ref="registerForm" label-width="5rem"
+            ref="registerForm" label-width="7rem"
             @submit.native.prevent
             class="user-registerForm">
                 <el-form-item  label="账号" prop="userId">
@@ -40,13 +40,13 @@
                     <el-input v-model="registerForm.questionAnswer"
                     placeholder="请输入密保答案"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary"
-                    plain 
-                    @click="submitForm('registerForm')">注册</el-button>
-                    <el-button @click="resetForm('registerForm')">重置</el-button>
-                </el-form-item>
             </el-form> 
+        </div>
+        <div class="right-cont-btn">
+            <el-button type="primary"
+            plain 
+            @click="submitForm('registerForm')">注册</el-button>
+            <el-button @click="resetForm('registerForm')">重置</el-button>
         </div>
         <div class="footer">
             <router-link class="link footer-left" to="/login">登录</router-link>
@@ -119,6 +119,14 @@ export default {
                 questionAnswer:[
                     { required: true, message: '请选择密保答案', trigger: 'blur' }
                 ]
+            }
+        }
+    },
+    mounted() {
+        window.onkeydown = (e)=>{
+            let key = window.event.keyCode;
+            if(key==13){
+                this.submitForm('registerForm');
             }
         }
     },

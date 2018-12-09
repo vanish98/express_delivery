@@ -1,9 +1,13 @@
 <template>
     <div class="person-woker-page">
         <div class="person-woker-body">
-            <leftMenu
-            :leftMenuData='leftMenuData'></leftMenu>
-            <div class="woker-router-cont">
+            <div class="woker-left-menu">
+                <leftMenu
+                :leftMenuData='leftMenuData'
+                @isCollapse='handleIsCollapse'></leftMenu>
+            </div>
+            <div class="woker-router-cont"
+            :class="{'isCollapse-w':isCollapse}">
                 <transition name='opa-mini'>
                     <router-view></router-view>
                 </transition> 
@@ -36,7 +40,7 @@ export default {
                 },
                 {
                     index:"2",
-                    icon:'el-icon-menu',
+                    icon:'el-icon-tickets',
                     title:'我的订单',
                     menuItem:[
                         {route:'wokerReceivedOrder',listTitle:'已接订单'},
@@ -45,7 +49,7 @@ export default {
                 },
                 {
                     index:"3",
-                    icon:'el-icon-tickets',
+                    icon:'el-icon-circle-plus',
                     title:'接单大厅',
                     menuItem:[
                         {route:'allUserOrderList',listTitle:'订单列表'}
@@ -59,10 +63,14 @@ export default {
                         {route:'myMessage',listTitle:'消息'}
                     ]
                 }
-             ]
+            ],
+            isCollapse:false
         }
     },
     methods:{
+        handleIsCollapse(newVal){
+            this.isCollapse = newVal;
+        },
         checkLogin(){
             let loading = this.$loading({lock:true,text:'正在加载...'});
             axios.get("/users/checkLogin").then((response)=>{
@@ -101,15 +109,30 @@ export default {
     width: 80%;
     margin: 0 auto 5rem; 
 }
+.woker-left-menu{
+    background-color: #fff;
+}
 .woker-router-cont{
     width: 100%;
-    min-height: 680px;
+    min-height: 35rem;
+    width:  calc(100% - 10.1rem);
     background-color: #fff;
-    border: 1px solid rgb(228, 225, 225);
+    border: 1px solid rgb(236, 236, 236);
+    border-top: none;
+    transition: all .5s;
+    background-color: #f4f9fd;
+}
+.isCollapse-w{
+    width:  calc(100% - 3.3rem);
 }
 @media only screen and (max-width:1200px){
     .person-woker-body{
         width: 90%;
+    }
+}
+@media only screen and (max-width:992px){
+    .person-woker-body{
+        width: 100%;
     }
 }
 </style>

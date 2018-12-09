@@ -14,11 +14,16 @@
                         placeholder="管理员账号"></el-input>
                     </el-form-item>
                     <el-form-item  label="密码" prop="adminPassWord">
-                        <el-input type='password' v-model="adminForm.adminPassWord"
+                        <el-input :type='inputType' 
+                        v-model="adminForm.adminPassWord"
                         placeholder="管理员密码"></el-input>
+                        <i class="toggle el-icon-view"
+                        :class="{'color':adminForm.adminPassWord==''}"
+                        @click="changeInputType"></i>
                     </el-form-item>
                 </el-form> 
-                <el-button type="primary" @click="submitForm('adminForm')">登录</el-button>
+                <el-button type="primary"
+                 @click="submitForm('adminForm')">登录</el-button>
                 <el-button  @click="resetForm('adminForm')">重置</el-button>
             </div>
         </div>
@@ -30,6 +35,7 @@ import axios from  'axios'
 export default {
   data(){
         return{
+            inputType:'password',
             adminForm:{
                 adminId:'',
                 adminPassWord:''
@@ -45,7 +51,18 @@ export default {
             }
         }
     },
+    mounted(){
+        window.onkeydown = (e)=>{
+            let key = window.event.keyCode;
+            if(key==13){
+                this.submitForm('adminForm');
+            }
+        }
+    },
     methods: {
+        changeInputType(){
+            this.inputType=(this.inputType=='password')?'text':'password';
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
@@ -93,7 +110,7 @@ export default {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    background-image: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
     background-color: #cff;
     display: flex;
     justify-content: center;
@@ -103,7 +120,7 @@ export default {
     position: relative;
     width: 25rem;
     height: 20rem;
-    background-color: rgba(255,255,255,.9);
+    background-color: #fff;
     box-shadow: 2rem 2rem 3rem #423f3f; 
     .header-title{
         height: 4rem;
@@ -122,6 +139,18 @@ export default {
         }
         .el-form-item{
             margin-bottom: 1.5rem;
+        }
+        .toggle.el-icon-view{
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            line-height: 1.5rem;
+            top: 50%;
+            transform: translate(0,-50%);
+            right: 0.2rem;
+        }
+        .toggle.color{
+             color: #ccc;
         }
         // 登录按钮
         .el-button--primary{

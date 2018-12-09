@@ -138,6 +138,15 @@ export default {
 
 <style lang='scss'>
 .adminOrderList{
+    .el-button{
+        width: 4.2rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        padding: 0;
+        span{
+            font-size: 0.6rem;
+        }
+    }
     .DeletePerson{
         margin-right: 2rem;
     }

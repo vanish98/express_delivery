@@ -65,7 +65,7 @@ export default {
               if(getElementTop(this.shwoCompts[i].$el) < vertical.scrollTop + 450){
                   this.shwoCompts[i].$data.isCmptShow =true;    
               }
-              if(vertical.process==1){
+              if(vertical.process>=0.8){
                   this.shwoCompts[i].$data.isCmptShow =true;
               }
           }
@@ -151,39 +151,47 @@ p::selection{
 .router-leave-active{
   @include transition(.3s); 
 }
-// @media only screen and (max-width:1750px){
-//     html{
-//       font-size: 114%;
-//     }
-// }
-// @media only screen and (max-width:1550px){
-//     html{
-//       font-size: 100.91%;
-//     }
-// }
-// @media only screen and (max-width:1400px){
-//     html{
-//       font-size: 91.14%;
-//     }
-// }
-// @media only screen and (max-width:1200px){
-//     html{
-//       font-size: 78.12%;
-//     }
-// }
-// @media only screen and (max-width:992px){
-//     html{
-//       font-size: 64.58%;
-//     }
-// }
-// @media only screen and (max-width:768px){
-//     html{
-//       font-size: 50%;
-//     }
-// }
-// @media only screen and (max-width:640px){
-//     html{
-//       font-size: 32.55%;
-//     }
-// }
+@media only screen and (max-width:1750px){
+    html{
+      font-size: 114%;
+    }
+}
+@media only screen and (max-width:1550px){
+    html{
+      font-size: 100.91%;
+    }
+}
+@media only screen and (max-width:1400px){
+    html{
+      font-size: 91.14%;
+    }
+}
+@media only screen and (max-width:1200px){
+    html{
+      font-size: 78.12%;
+    }
+}
+@media only screen and (max-width:992px){
+    html{
+      font-size: 64.58%;
+    }
+    .mgtop{
+      @include translateY(-4.1rem);
+    }
+}
+@media only screen and (max-width:768px){
+    html{
+      font-size: 50%;
+    }
+}
+@media only screen and (max-width:640px){
+    html{
+      font-size: 32.55%;
+    }
+}
+@media only screen and (max-width:440px){
+    html{
+      font-size: 22.92%;
+    }
+}
 </style>

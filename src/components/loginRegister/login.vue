@@ -7,7 +7,7 @@
         </div>
         <div class="form-cont">
             <el-form :model="loginForm" :rules="loginRules" 
-            ref="loginForm" label-width="5rem"
+            ref="loginForm" label-width="7rem"
             
             class="user-loginForm">
                 <el-form-item  label="账号" prop="userId">
@@ -41,12 +41,12 @@
                     <el-radio :label="1">工作人员</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary"
-                    @click="submitForm('loginForm')">登录</el-button>
-                    <el-button @click="resetForm('loginForm')">重置</el-button>
-                </el-form-item>
             </el-form> 
+        </div>
+        <div class="right-cont-btn">
+            <el-button type="primary"
+            @click="submitForm('loginForm')">登录</el-button>
+            <el-button @click="resetForm('loginForm')">重置</el-button>
         </div>
         <div class="footer">
             <router-link class="link footer-left" to="/register">注册</router-link>
@@ -101,6 +101,12 @@ export default {
     mounted() {
         this.randomCode=this.randomNum();
         this.codeImg=this.randomCodeimg();
+        window.onkeydown = (e)=>{
+            let key = window.event.keyCode;
+            if(key==13){
+                this.submitForm('loginForm');
+            }
+        }
     },
     methods: {
         randomNum(){
@@ -207,6 +213,10 @@ export default {
             position: relative;
             height: 2rem;
             width: 6.5rem;
+            .Code-bg{
+                width: 100%;
+                height: 100%;
+            }
         }
         .randomCode{
             position: absolute;
@@ -218,7 +228,7 @@ export default {
             font-size: 1.1rem;  
             letter-spacing: 0.1rem;
             color: #555; 
-            transform:translate(-30%,-50%) rotate(random()*15deg);      
+            transform:translate(-20%,-45%) rotate(random()*15deg);      
             transform-origin:center;
         }
         .toggle.el-icon-view{
@@ -239,5 +249,18 @@ export default {
         }
     }
 }
-
+@media only screen and (max-width:768px){
+    .right-login-body .form-cont .rightCode{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        .rightCode-cont{
+            height: 3rem;
+            width: 9rem;
+            .randomCode{
+                line-height: 3rem;
+                font-size: 3rem;
+            }
+        }
+    }
+}
 </style>

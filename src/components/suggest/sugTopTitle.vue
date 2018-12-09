@@ -4,8 +4,8 @@
         <div class="title-cont">  
             <div class="line-y"></div>
             <div class="circle" @click="$emit('cahngeShow')">
-                 <h2>suggest</h2>
-                 <h2 class="show">点击</h2>
+                 <h2>OFF</h2>
+                 <h2 class="show">ON</h2>
             </div>  
         </div>     
    </div>
@@ -19,9 +19,9 @@ export default {
 
 <style scoped lang='scss'>
 @import '../../style/mixin';
-$title-h:12rem; 
+$title-h:10rem; 
 $circle-top-h:1rem;
-$cicle-h:3.6rem;
+$cicle-h:3rem;
 .sug-title{
     display: flex;
     justify-content: center;
@@ -57,12 +57,13 @@ $cicle-h:3.6rem;
     }
     .circle{   
         position: relative;
+        overflow: hidden;
         width:$cicle-h;
         height: $cicle-h;
         line-height: $cicle-h;
         margin-top: -0.1rem;
         @include border-radius(100%);
-        border: 2px solid #4facfe;
+        border: 0.1rem solid #4facfe;
         background-color: #68b8fe;
         background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
         &:hover{
@@ -86,7 +87,7 @@ $cicle-h:3.6rem;
             width: 100%;
             color: #fff;
             letter-spacing: 0.1rem;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
         }
     }
 }

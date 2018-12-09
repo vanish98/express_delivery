@@ -57,7 +57,7 @@ $text-color:#777;
     display: flex;
     flex-direction: column;
     width: 60%;
-    margin: -5rem auto 10rem;
+    margin: -4rem auto 10rem;
     border:0.4rem solid #4facfe;
     box-sizing: border-box;
     box-shadow: 1rem 1rem 1rem #888;
@@ -67,7 +67,7 @@ $text-color:#777;
 }
 .hiden-h{
     height: 2.5rem;
-    margin-bottom: 34rem;
+    margin-bottom: 32rem;
 }
 .sug-cont-body{
     padding: 2rem 1rem;

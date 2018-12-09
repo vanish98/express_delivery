@@ -53,6 +53,25 @@
                 <el-form-item label="联系地址 :" class="address">
                     <span>{{ props.row.address }}</span>
                 </el-form-item>
+                <template v-if="isApply || isHistoryApply">
+                    <el-form-item label="处理状态 :" >
+                        <span>{{ props.row.isHandle ?'已处理' :'未处理' }}</span>
+                    </el-form-item>
+                    <el-form-item label="申请次数 :" >
+                        <span>{{ props.row.applycount}}</span>
+                    </el-form-item>
+                </template>
+                <template v-if="isHistoryApply">
+                    <el-form-item label="申请时间 :" >
+                        <span>{{ props.row.applyTime }}</span>
+                    </el-form-item>
+                    <el-form-item label="处理时间 :" > 
+                        <span>{{ props.row.handleTime }}</span>
+                    </el-form-item>
+                    <el-form-item label="处理结果 :" >
+                        <span>{{ props.row.isJoinUsOk ?'审核通过' :'拒绝申请' }}</span>
+                    </el-form-item>
+                </template>
             </el-form>
         </template>  
     </el-table-column>
@@ -71,10 +90,25 @@
     label="余额">  
     </el-table-column>
     <el-table-column 
+    v-if="!isApply && !isHistoryApply"
     prop='gender'
     :formatter='genderInit'
     label="性别">  
     </el-table-column>
+    <template v-if="isApply || isHistoryApply">
+        <el-table-column 
+        prop='isHandle'
+        :formatter='isHandleInit'
+        label="处理状态">  
+        </el-table-column>
+    </template>
+    <template v-if="isHistoryApply">
+        <el-table-column 
+        prop='isJoinUsOk'
+        :formatter='isJoinUsOkInit'
+        label="处理结果">  
+        </el-table-column>
+    </template>
     <el-table-column  align="right">
          <template slot="header" slot-scope="scope">
             <span  style="margin-right:3rem">操作</span>
@@ -86,16 +120,25 @@
                 type='danger'
                 key='agreeApply'
                 class="agreeApply-btn"
-                @click="$emit('agreeApply',scope.row)"
+                @click="$emit('disAgreeApply',scope.row)"
                 >拒绝申请</el-button>
                 <el-button
                 size="mini"
                 type='success'
                 key='DisagreeApply'
                 class="DisagreeApply-btn"
-                @click="$emit('DisagreeApply',scope.row)"
+                @click="$emit('agreeApply',scope.row)"
                 >审核通过</el-button>
             </template> 
+            <template v-else-if="isHistoryApply">
+                <el-button
+                size="mini"
+                type='danger'
+                class="DeleteHistoryApply"
+                key='Delete'
+                @click="$emit('DeleteHistoryApply',scope.row)"
+                >删除记录</el-button>
+            </template>
             <template v-else>
                 <el-button
                 size="mini"
@@ -120,7 +163,8 @@ export default {
                 prop: String,
                 sortable:Boolean
         },
-        isApply:{type:Boolean,default:false},
+        isApply:{type:Boolean,default:false}, //是否是加入我们的申请列表
+        isHistoryApply:{type:Boolean,default:false},//是否是加入我们的历史申请
         showBalance:{type:Boolean,default:true}
     },
     data(){
@@ -139,6 +183,12 @@ export default {
         },
         genderInit(row, column, cellValue, index){
             return cellValue==1?'男':'女'
+        },
+        isHandleInit(row, column, cellValue, index){
+            return cellValue==true?'已处理':'未处理'
+        },
+        isJoinUsOkInit(row, column, cellValue, index){
+            return cellValue==true?'审核通过':'拒绝申请'
         }
     }
 }
@@ -146,7 +196,8 @@ export default {
 
 <style lang='scss'>
 // 右边操作按钮
-.admin-page-body .DeletePerson{
+.admin-page-body .DeletePerson,
+.admin-page-body .DeleteHistoryApply{
         margin-right: 2rem;
     }
 .agreeApply-btn{
@@ -158,8 +209,18 @@ export default {
 }
 .allUser-page,
 .allWoker-page,
+.joinUsHistoryApply-page,
 .joinUsApply-page,
 .findPeople-page{
+    .el-button{
+        width: 4.2rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        padding: 0;
+        span{
+            font-size: 0.6rem;
+        }
+    }
     .el-message{
         top: 5rem;
     }

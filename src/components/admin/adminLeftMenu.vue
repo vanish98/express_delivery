@@ -62,26 +62,40 @@ import {gotoNewOrder} from './../../assets/js/gotoNewOrder'
     position: relative;
     text-align: right;
     height: 100%;
-    background-color: #00f2fe;
+    background-color: #fff;
+    border-right: 1px solid rgb(238, 236, 236);
     .el-menu-vertical-demo,
     .el-radio-button__inner,
     .el-menu{
-        background-color: #f7f7f7;
-        background-image: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-    }
-    .el-submenu__title i{
-        color: #fff;
+        background-color: transparent;
+        border-right: none;
     }
     .el-submenu__title,
-    .el-menu-item {
-        color: #fff;
-        &:focus,
-        &:hover{
-            background-color: rgba(255,255,255,.5);
-        } 
+    .el-submenu__title i{
+        color: #888;
+    }
+    .el-menu-item{
+        background-color: #f6f6f6;
+        border-bottom: 1px solid rgb(238, 236, 236);
+    }
+    .el-menu-item.is-active{
+        color: #0096ff;
+    }
+    // 当前打开的菜单
+    .el-submenu.is-active{
+        .el-submenu__title{
+            background-color: #409eff;
+            color: #fff;
+        }
+        .el-submenu__title i{
+            color: #fff;
+        }
+    }
+    .el-submenu__title{
+        border-bottom: 1px solid rgb(236, 236, 236);
     }
     .el-submenu__title:hover{
-         color: #666;
+         background-color: #ecf5ff;
     }
     /* 展开或者收起按钮 */
     .el-radio-group{
