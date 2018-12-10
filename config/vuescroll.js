@@ -82,13 +82,13 @@ export default {
       background: '#01a99a',
       opacity: 0,
       /** Rail's size(Height/Width) , default -> 6px */
-      size: '6px',
+      size: '0.3rem',
       /** Specify rail and bar's border-radius, or the border-radius of rail and bar will be equal to the rail's size. default -> false **/
       specifyBorderRadius: false,
       /** Rail the distance from the two ends of the X axis and Y axis. **/
-      gutterOfEnds: '2px',
+      gutterOfEnds: '0.1rem',
       /** Rail the distance from the side of container. **/
-      gutterOfSide: '2px',
+      gutterOfSide: '0.1rem',
       /** Whether to keep rail show or not, default -> false, event content height is not enough */
       keepShow: false
     },

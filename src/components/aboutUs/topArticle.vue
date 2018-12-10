@@ -52,10 +52,20 @@ $text-color:#999;
             line-height: 1.5rem;
             margin: 0 auto;
             letter-spacing: 0.1rem;
-            color: $text-color;
+            color: $text-color;   
             text-align: justify;
             text-justify: inter-ideograph;
         }
+    }
+}
+
+@media only screen and (max-width:640px){
+    .topArticle{
+        margin-bottom: 8rem;
+    }
+    .topArticle .art-body p[data-v-900eda16]{
+        width: 80%;
+        line-height: 1.7rem;
     }
 }
 </style>

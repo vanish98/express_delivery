@@ -4,6 +4,7 @@
         :title='percentage+"%"'
         :show-text='false'
         :color='lineColor'
+        class="percentage-line"
         :percentage="percentage">
         </el-progress>
     </div>
@@ -30,5 +31,10 @@ export default {
     height: 0.2rem;
     bottom: 0;
     left: 0;
+    background-color:transparent;
+}
+/* //进度条背景 */
+.el-progress-bar__outer{
+    background-color: transparent;
 }
 </style>

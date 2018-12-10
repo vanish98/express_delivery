@@ -72,17 +72,19 @@ export default {
     flex-wrap: wrap;
     padding: 1rem 0;
     i.icon{
+            overflow: hidden;
             display: block;
             width: 2.7rem;
             height: 2.7rem;
             background-size: contain;
+            background-repeat: no-repeat;
     }
     .chat{
         display: flex;
         flex-grow: 1;
         align-items: center;
         margin: 0 1rem 2rem 2rem;
-        border-right: 1px solid #ccc;
+        border-right: 0.05rem solid #ccc;   
         i{
             background-image: url('../../assets/img/customer-service-footer-left.png');
         }
@@ -103,7 +105,7 @@ export default {
         }
         P{
             color: #999;
-            letter-spacing: 1px;
+            letter-spacing: 0.05rem;
         }
         
     }
@@ -112,7 +114,8 @@ export default {
             width: 5rem;
             height: 2rem;
             line-height: 2rem;
-            border-radius: 4px;
+            font-size: 0.7rem;
+            border-radius: 0.2rem;
             background-color: #2396ff;
             color: #fff;           
             text-align: center;
@@ -136,5 +139,13 @@ export default {
 .el-button{
     border: none;
     margin-left: 1rem;
+}
+@media only screen and (max-width:640px){
+    .callUs-body .chat{
+        border: none;
+    }
+    .server-callUs{
+        margin-top: 2rem;
+    }
 }
 </style>

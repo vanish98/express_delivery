@@ -1,9 +1,10 @@
 <template>
 <div id="app">   
 
-    <appHeader
-    data='header'
-    :class="{hiddenHeader}"></appHeader> 
+    <router-view 
+    :class="{hiddenHeader}"
+    name="header">
+    </router-view>
 
     <vue-scroll 
     ref='scroll'
@@ -61,23 +62,35 @@ export default {
                this.showGoTop = false;
           }
           for(let i =0; i <this.shwoCompts.length ;i++){
-              if(getElementTop(this.shwoCompts[i].$el) < vertical.scrollTop + 500){
+              if(getElementTop(this.shwoCompts[i].$el) < vertical.scrollTop + 450){
+                  this.shwoCompts[i].$data.isCmptShow =true;    
+              }
+              if(vertical.process>=0.8){
                   this.shwoCompts[i].$data.isCmptShow =true;
-                   
               }
           }
           
         },
         scrollToTop(){       
            this.$refs['scroll'].scrollTo({ x: 0, y: 0});
+           this.percentage = 0;
         },
         showComponent(target){
             this.shwoCompts=target;
         }   
     },
-    mounted() {
-      
-    }, 
+    created() {
+      if(document.body.clientWidth <= 768){
+          setTimeout(()=>{
+                this.$notify({
+                  title: '显示问题',
+                  message: '本站主要为pc端,您的设备可能为移动端,建议横屏浏览.',
+                  duration:0,
+                  type: 'success'
+              });
+          },500);
+        }
+    },
 }
 </script>
 
@@ -90,7 +103,7 @@ html{
   //以20为基准 
 }
 body{
-  font-size: 14px;
+  font-size: 0.7rem;
   overflow: hidden;
   //background-color: #f7f7f7;
 }
@@ -108,18 +121,32 @@ html,body,#app{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+//顶部个人中心消息红点
+.el-badge__content.is-fixed.is-dot{
+    right: 0;
+}
 .__vuescroll{
-  @include transition(.6s);
+  @include transition(.3s);
 }
 .mgtop{
   @include translateY(-3rem);
 }
-.header.hiddenHeader[data]{
-    @include transition(.8s); 
+.header.hiddenHeader{
+    @include transition(1s); 
     @include translateY(-100%);
 }
+textarea::selection,
+input::selection,
+span::selection,
+div::selection,
+a::selection,
+em::selection,
+li::selection,
+h1::selection,
 h2::selection,
 h3::selection,
+h4::selection,
+h5::selection,
 p::selection{
     background-color:#93C; 
     color:#FCF;
@@ -131,5 +158,48 @@ p::selection{
 .router-enter-active,
 .router-leave-active{
   @include transition(.3s); 
+}
+@media only screen and (max-width:1750px){
+    html{
+      font-size: 114%;
+    }
+}
+@media only screen and (max-width:1550px){
+    html{
+      font-size: 100.91%;
+    }
+}
+@media only screen and (max-width:1400px){
+    html{
+      font-size: 91.14%;
+    }
+}
+@media only screen and (max-width:1200px){
+    html{
+      font-size: 78.12%;
+    }
+}
+@media only screen and (max-width:992px){
+    html{
+      font-size: 64.58%;
+    }
+    .mgtop{
+      @include translateY(-4.1rem);
+    }
+}
+@media only screen and (max-width:768px){
+    html{
+      font-size: 50%;
+    }
+}
+@media only screen and (max-width:640px){
+    html{
+      font-size: 32.55%;
+    }
+}
+@media only screen and (max-width:440px){
+    html{
+      font-size: 22.92%;
+    }
 }
 </style>

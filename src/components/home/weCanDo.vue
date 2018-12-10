@@ -14,7 +14,9 @@
                     <h3>{{it.title}}</h3>
                 </div>
                 <div class="item-body">
-                    <P>{{it.body}}</P>
+                    <transition name='opa'>
+                        <P v-if='isCmptShow'>{{it.body}}</P>
+                    </transition>
                 </div>
             </div>
         </div>
@@ -46,7 +48,8 @@ export default {
                     我们竭诚为您服务,您足不出户就可以拿到自己的快递
                     我们竭诚为您服务,让您足不出户就可以拿到自己的快递`
                 },
-            ]
+            ],
+            isCmptShow:false
         }
     }
 }
@@ -199,6 +202,16 @@ $bd-radius:$item-title-h /2 *1.1;
     }
     to{
         transform: rotate(360deg);
+    }
+}
+
+
+@media only screen and (max-width:768px){
+    .item{
+        width: 40%;
+        .item-body{
+            width: 80%;
+        }
     }
 }
 </style>

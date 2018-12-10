@@ -81,5 +81,22 @@ export default {
         color: #999;
     }
 }
+@media only screen and (max-width:640px){
+    .imgCont,
+    .articleCont{
+        width: 100%;
+    }
+    .articleCont{
+        margin-bottom: 3rem;
+    }
+    .article-body p{
+        width: 80%;
+        line-height: 1.5rem;
+    }
+    .Purpose,
+    .ourTeam{
+         flex-direction: column-reverse;
+    }
 
+}
 </style>
