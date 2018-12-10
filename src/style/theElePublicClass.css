@@ -264,6 +264,7 @@
     line-height: 1.7rem;
 }
 .el-message{
+    top: 7rem;
     min-width: 15rem;
     border-width: 0.05rem;
     padding: 0.75rem 0.75rem 0.75rem 1rem;

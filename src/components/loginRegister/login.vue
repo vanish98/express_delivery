@@ -59,13 +59,13 @@
 import axios from 'axios'
 export default {
   data(){
-        // let validateCode =(rule, value, callback) => {
-        //     if (this.randomCode!=this.$data.loginForm.validateCode) {
-        //           callback(new Error('验证码不正确 !'));
-        //     }else{
-        //          callback();
-        //     }
-        // };
+        let validateCode =(rule, value, callback) => {
+            if (this.randomCode!=this.$data.loginForm.validateCode) {
+                  callback(new Error('验证码不正确 !'));
+            }else{
+                 callback();
+            }
+        };
         return{
             inputType:'password',
             randomCode:'',
@@ -84,11 +84,11 @@ export default {
                 passWord:[
                     { required: true, message: '请输入密码', trigger: 'blur' }
                 ],
-                // validateCode:[
-                //     { required: true, message: '请输入验证码', trigger: 'blur' },
-                //     { validator: validateCode , trigger: 'blur'},
-                //     { validator: validateCode , trigger: 'change'}                   
-                // ]
+                validateCode:[
+                    { required: true, message: '请输入验证码', trigger: 'blur' },
+                    { validator: validateCode , trigger: 'blur'},
+                    { validator: validateCode , trigger: 'change'}                   
+                ]
             },
             validateCodeImg:[
                 './static/img/login-Verification-1.png',
@@ -193,7 +193,7 @@ export default {
         width: 90%;
         margin-top: 1rem;
         .el-form-item{
-            margin-bottom: 0.9rem;
+            margin-bottom: 1rem;
             &.grade{
                 margin-bottom: 0.3rem;
             }

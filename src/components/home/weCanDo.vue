@@ -206,9 +206,12 @@ $bd-radius:$item-title-h /2 *1.1;
 }
 
 
-@media only screen and (max-width:640px){
+@media only screen and (max-width:768px){
     .item{
-        width: 16rem;
+        width: 40%;
+        .item-body{
+            width: 80%;
+        }
     }
 }
 </style>

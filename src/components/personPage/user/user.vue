@@ -86,6 +86,7 @@ export default {
                         this.$router.push({ path: '/login' });                      
                     }
             }).catch(err=>{
+                 loading.close();
                 console.log(err);
             })
         },

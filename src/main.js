@@ -17,14 +17,6 @@ Vue.use(vuescroll,{
   ops:scrollConfig
 });
 
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: './assets/error.png',
-  loading: './assets/loading.gif',
-  attempt: 1
-})
-
 import person_title from './components/personPage/personContTitle'
 Vue.component('person-title', person_title);
 
@@ -38,3 +30,5 @@ new Vue({
   template: '<App/>',
   render: h => h(App)
 })
+
+document.getElementById("app-loading-first").style.display='none';

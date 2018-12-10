@@ -78,7 +78,19 @@ export default {
         showComponent(target){
             this.shwoCompts=target;
         }   
-    }
+    },
+    created() {
+      if(document.body.clientWidth <= 768){
+          setTimeout(()=>{
+                this.$notify({
+                  title: '显示问题',
+                  message: '本站主要为pc端,您的设备可能为移动端,建议横屏浏览.',
+                  duration:0,
+                  type: 'success'
+              });
+          },500);
+        }
+    },
 }
 </script>
 
@@ -112,10 +124,6 @@ html,body,#app{
 //顶部个人中心消息红点
 .el-badge__content.is-fixed.is-dot{
     right: 0;
-}
-//全局消息提示框
-.el-message{
-  top: 5rem;
 }
 .__vuescroll{
   @include transition(.3s);

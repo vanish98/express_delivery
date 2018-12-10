@@ -5,15 +5,17 @@
              <div class="circle"></div>
         </div>
         <div class="news-body">
-            <div class="ns-item" 
+            <div class="news-item-cont" 
             v-for='obj in newsSoure' :key=obj.id>
-                <div class="out-border"></div>
-                <transition name='opa'>
-                    <img :src="obj.imgSrc" v-if="isCmptShow" alt="精彩瞬间">
-                </transition>
-                <div class="item-body">
-                    <h4>{{obj.title}}</h4>
-                    <p>{{obj.article}}</p>
+                <div class="ns-item">
+                    <div class="out-border"></div>
+                    <transition name='opa'>
+                        <img :src="obj.imgSrc" v-if="isCmptShow" alt="精彩瞬间">
+                    </transition>
+                    <div class="item-body">
+                        <h4>{{obj.title}}</h4>
+                        <p>{{obj.article}}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,6 +111,10 @@ export default {
     @include box-shadow(0 0 0.3rem 0.3rem #ccc);
     cursor: pointer;
 }
+.news-item-cont{
+    display: flex;
+    justify-content: center;
+}
 .out-border{
     position: absolute;
     top: 1rem;
@@ -172,6 +178,11 @@ export default {
 }
 .ns-item:hover  .item-body{
     height:70%;
+}
+@media only screen and (max-width:768px){
+    .news-item-cont{
+        width: 40%;
+    }
 }
 </style>
 
