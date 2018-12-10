@@ -3,18 +3,20 @@ express_delivery
 
 <h2>说明</h2>
 <h3>主要技术 :</h3> 
-vue + nodejs + mongodb <br/>
+<h3>vue + nodejs + mongodb</h3> <br/>
 项目地址: www.bg666.xyz <br/>
 <h4>测试账号:</h4> <br/>
 普通用户账号:15279778477 密码:814233583 <br/>
 工作人员账号:15279778478 密码:814233583 <br/>
 管理员账号: ...不能给.<br/>
 
+======由于时间紧,主要是实现功能,样式很丑,勉强看
+
 <h3>项目经历:</h3>
 该项目是我花了近一个月的原创项目,从思路到实现, 完成前端,然后用nodejs写接口,数据库用的mongodb,
-到后面的服务器部署,解决跨域问题,等等,收获甚多(一路踩坑过来),<br/>
-<br/>
-本着开源精神,贡献出来给学习阶段的朋友学习,(大佬请忽略).<br/>
+到后面的服务器部署,解决跨域问题,等等,收获甚多(一路踩坑过来),<br/><br/>
+<br/>+++++++++++++++
+本着开源精神,贡献出来给学习阶段的朋友学习,(大佬请忽略).====<br/><br/>
 由于整个项目都是我一个人单独做,而且时间特别紧,大概<em>30</em>多个页面,所以样式很丑,勉强看吧,<br/>
 哈哈哈,我主要是实现基本功能.
 
@@ -30,20 +32,20 @@ mongodb      (数据库 可导入)<br/>
 
 <h2>简单教程(要详细的说明补充在下面)</h2>
 
-1 >>>.先clone 到你本地
-git clone git@github.com:bgwd666/express_delivery.git
+1 >>>.先clone 到你本地<br/>
+==== git clone git@github.com:bgwd666/express_delivery.git
 
 <h3>web</h3>
 2 >>> 前端: 进入 web 目录下打开终端(命令窗口)
-    npm i  (安装依赖) <br/>
-    npm run dev (运行,然后浏览器打开127.0.0.1:8080) <br/>
+    ==== npm i  (安装依赖) <br/>
+    ==== npm run dev (运行,然后浏览器打开127.0.0.1:8080) <br/>
 
 <h3>server</h3>
 3 >>> 服务端: 进入 server 目录下打开终端(命令窗口)
-    npm i  (安装依赖) <br/>
-    node ./bin/www (推荐用 pm2管理node服务,修改代码后可自动重启等等强大功能!)<br/>
+   ==== npm i  (安装依赖) <br/>
+   ==== node ./bin/www (推荐用 pm2管理node服务,修改代码后可自动重启等等强大功能!)<br/>
 
-    (如果用的pm2 则 pm2 start bin/www --watch) 
+    (如果用的pm2 则 === pm2 start bin/www --watch) 
 <h3>mongodb</h3>
 4 >>> 数据库 :
     安装 mondodb 数据库,然后导入 该 mongodb 目录的 collection .<br/>
